@@ -1,0 +1,1309 @@
+index.html: 
+
+<!DOCTYPE html> 
+
+<html> 
+
+<head> 
+
+    <title>Ticket Reservation System</title> 
+
+    <style> 
+
+        body { 
+
+            background-color: lightcyan; 
+
+            font-family: Arial, sans-serif; 
+
+            margin: 0; 
+
+        } 
+
+        .header { 
+
+            background-color: lightblue; 
+
+            padding: 20px; 
+
+            text-align: center; 
+
+        } 
+
+        h1 { 
+
+            color: darkblue; 
+
+        } 
+
+        h2 { 
+
+            color: darkgreen; 
+
+        } 
+
+        .nav { 
+
+            text-align: center; 
+
+            margin: 15px; 
+
+        } 
+
+        .nav table { 
+
+            margin: auto; 
+
+            border-collapse: collapse; 
+
+        } 
+
+        .nav th { 
+
+            padding: 12px 20px; 
+
+            background-color: white; 
+
+        } 
+
+        .nav a { 
+
+            text-decoration: none; 
+
+            color: darkblue; 
+
+            font-weight: bold; 
+
+        } 
+
+        .nav a:hover { 
+
+            color: red; 
+
+        } 
+
+        .service-table { 
+
+            border-collapse: collapse; 
+
+            margin: auto; 
+
+            background-color: white; 
+
+         
+
+        .service-table th { 
+
+            background-color: lightblue; 
+
+            padding: 12px; 
+
+        } 
+
+        .service-table td { 
+
+            padding: 12px; 
+
+            text-align: center; 
+
+        } 
+
+        .service-table img { 
+
+            border-radius: 8px; 
+
+        } 
+
+        ul, ol { 
+
+            line-height: 2; 
+
+        } 
+
+        .form-table { 
+
+            margin: auto; 
+
+            background-color: white; 
+
+        } 
+
+        .form-table td { 
+
+            padding: 10px; 
+
+        } 
+
+        input, select { 
+
+            padding: 7px; 
+
+        } 
+
+        input[type="submit"] { 
+
+            background-color: green; 
+
+            color: white; 
+
+            border: none; 
+
+            padding: 10px 20px; 
+
+            cursor: pointer; 
+
+        } 
+
+        input[type="reset"] { 
+
+            background-color: red; 
+
+            color: white; 
+
+            border: none; 
+
+            padding: 10px 20px; 
+
+            cursor: pointer; 
+
+        } 
+
+        .footer { 
+
+            text-align: center; 
+
+            padding: 15px; 
+
+        } 
+
+    </style> 
+
+    <script> 
+
+        function validateHomeForm() { 
+
+            var name = 
+
+                document.getElementById("name").value; 
+
+            var email = 
+
+                document.getElementById("email").value; 
+
+            var phone = 
+
+                document.getElementById("phone").value; 
+
+            var type = 
+
+                document.getElementById("bookingType").value; 
+
+            var date = 
+
+                document.getElementById("date").value; 
+
+            if (name == "") { 
+
+                alert("Please enter your name."); 
+
+                return false; 
+
+            } 
+
+            if (email == "") { 
+
+                alert("Please enter your email."); 
+
+                return false; 
+
+            } 
+
+            if (phone == "") { 
+
+                alert("Please enter your phone number."); 
+
+                return false; 
+
+            } 
+
+            if (phone.length != 10) { 
+
+                alert("Phone number must contain 10 digits."); 
+
+                return false; 
+
+            } 
+
+            if (type == "") { 
+
+                alert("Please select a booking type."); 
+
+                return false; 
+
+            } 
+
+            if (date == "") { 
+
+                alert("Please select a travel date."); 
+
+                return false; 
+
+            } 
+
+            alert("Details validated successfully!"); 
+
+            return true; 
+
+        } 
+
+        function goToBooking() { 
+
+            var type = 
+
+                document.getElementById("bookingType").value; 
+
+if (type == "Movie") { 
+
+                window.location.href = "movie.html"; 
+
+            } 
+
+        } 
+
+    </script> 
+
+</head> 
+
+<body> 
+
+<div class="header"> 
+
+    <marquee behavior="alternate"> 
+
+        <h1>TICKET RESERVATION SYSTEM</h1> 
+
+    </marquee> 
+
+    <img 
+
+        src="https://cdn-icons-png.flaticon.com/512/854/854878.png" 
+
+        width="120" 
+
+        height="120" 
+
+    > 
+
+    <p> 
+
+        <i> 
+
+            Welcome to our Ticket Reservation System. 
+
+            Book your Movie, Train, Bus and Two Wheeler 
+
+            tickets easily and quickly. 
+
+            Enjoy safe, secure and hassle-free booking. 
+
+        </i> 
+
+    </p> 
+
+</div> 
+
+<hr> 
+
+<div class="nav"> 
+
+<table border="1"> 
+
+<tr> 
+
+<th> 
+
+<a href="index.html">Home</a> 
+
+</th> 
+
+<th> 
+
+<a href="movie.html">Movie Booking</a> 
+
+</th> 
+
+<th> 
+
+Train Booking 
+
+</th> 
+
+<th> 
+
+Bus Booking 
+
+</th> 
+
+<th> 
+
+Two Wheeler Booking 
+
+</th> 
+
+</tr> 
+
+</table> 
+
+</div> 
+
+<hr> 
+
+<center> 
+
+<h2>Available Booking Services</h2> 
+
+<table border="1" 
+
+       cellpadding="10" 
+
+       class="service-table"> 
+
+<tr> 
+
+<th>Service</th> 
+
+<th>Image</th> 
+
+<th>Description</th> 
+
+</tr> 
+
+<tr> 
+
+<td>Movie Ticket</td> 
+
+<td> 
+
+<img 
+
+src="https://wallpaperaccess.com/full/1161069.jpg" 
+
+width="180" 
+
+height="120" 
+
+> 
+
+</td> 
+
+<td> 
+
+Book tickets for the latest movies. 
+
+</td> 
+
+</tr> 
+
+<tr> 
+
+<td>Train Ticket</td> 
+
+<td> 
+
+<img 
+
+src="https://images.unsplash.com/photo-1474487548417-781cb71495f3?w=600" 
+
+width="180" 
+
+height="120" 
+
+> 
+
+</td> 
+
+<td> 
+
+Reserve train tickets with available timings. 
+
+</td> 
+
+</tr> 
+
+<tr> 
+
+<td>Bus Ticket</td> 
+
+<td> 
+
+<img 
+
+src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=600" 
+
+width="180" 
+
+height="120" 
+
+> 
+
+</td> 
+
+<td> 
+
+Travel comfortably by bus. 
+
+</td> 
+
+</tr> 
+
+<tr> 
+
+<td>Two Wheeler</td> 
+
+<td> 
+
+<img 
+
+src="https://images.unsplash.com/photo-1558981806-ec527fa84c39?w=600" 
+
+height="120" 
+
+width="180" 
+
+> 
+
+</td> 
+
+<td> 
+
+Quick bike rides for short-distance travel. 
+
+</td> 
+
+</tr> 
+
+</table> 
+
+</center> 
+
+<hr> 
+
+<h2>Why Choose Our Website?</h2> 
+
+<ul> 
+
+<li>Easy Online Booking</li> 
+
+<li>Fast Confirmation</li> 
+
+<li>Secure Booking Process</li> 
+
+<li>24 × 7 Customer Support</li> 
+
+<li>Affordable Ticket Prices</li> 
+
+</ul> 
+
+<hr> 
+
+<h2>Steps to Book Ticket</h2> 
+
+<ol> 
+
+<li>Select your booking category.</li> 
+
+<li>Fill in your details.</li> 
+
+<li>Choose your preferred option.</li> 
+
+<li>Confirm your booking.</li> 
+
+<li>Enjoy your journey.</li> 
+
+</ol> 
+
+<hr> 
+
+<center> 
+
+<h2>Contact Us</h2> 
+
+<table border="1" 
+
+       cellpadding="8"> 
+
+<tr> 
+
+<th>Department</th> 
+
+<th>Contact</th> 
+
+</tr> 
+
+<tr> 
+
+<td>Customer Support</td> 
+
+<td>9876543210</td> 
+
+</tr> 
+
+<tr> 
+
+<td>Email</td> 
+
+<td>ticketbooking@gmail.com</td> 
+
+</tr> 
+
+<tr> 
+
+<td>Address</td> 
+
+<td>Madurai, Tamil Nadu</td> 
+
+</tr> 
+
+</table> 
+
+</center> 
+
+<hr> 
+
+<div class="footer"> 
+
+<h3>Quick Links</h3> 
+
+<a href="movie.html"> 
+
+Movie Booking 
+
+</a> 
+
+<hr> 
+
+<p> 
+
+<b> 
+
+© 2026 Ticket Reservation System. 
+
+All Rights Reserved. 
+
+</b> 
+
+</p> 
+
+</div> 
+
+</body> 
+
+</html> 
+
+ 
+
+Movie.html: 
+
+<!DOCTYPE html> 
+
+<html> 
+
+<head> 
+
+<title>Movie Ticket Booking</title> 
+
+<style> 
+
+body{background-color:lightyellow;font-family:Arial,sans-serif;margin:0} 
+
+.header{background-color:lightblue;padding:20px;text-align:center} 
+
+h1{color:darkblue} 
+
+h2{color:darkgreen} 
+
+.nav{text-align:center;margin:15px} 
+
+.nav table{margin:auto;border-collapse:collapse} 
+
+.nav th{padding:12px 20px;background-color:white} 
+
+.nav a{text-decoration:none;color:darkblue;font-weight:bold} 
+
+.nav a:hover{color:red} 
+
+.movie-table{border-collapse:collapse;margin:auto;background-color:white} 
+
+.movie-table th{background-color:lightblue;padding:12px} 
+
+.movie-table td{padding:12px;text-align:center} 
+
+.movie-table img{border-radius:10px} 
+
+.booking-form{margin:auto;background-color:white} 
+
+.booking-form td{padding:10px} 
+
+input,select,textarea{padding:7px} 
+
+input[type="submit"]{background-color:green;color:white;border:none;padding:10px 20px;cursor:pointer} 
+
+input[type="reset"]{background-color:red;color:white;border:none;padding:10px 20px;cursor:pointer} 
+
+input[type="submit"]:hover{background-color:darkgreen} 
+
+input[type="reset"]:hover{background-color:darkred} 
+
+ul,ol{line-height:2} 
+
+.footer{text-align:center;padding:15px} 
+
+</style> 
+
+<script> 
+
+function validateMovieForm(){ 
+
+var name=document.getElementById("name").value.trim(); 
+
+var mobile=document.getElementById("mobile").value.trim(); 
+
+var movie=document.getElementById("movie").value; 
+
+var tickets=document.getElementById("tickets").value; 
+
+if(name==""){alert("Please enter your name.");return false} 
+
+if(mobile==""){alert("Please enter your mobile number.");return false} 
+
+if(!/^[0-9]{10}$/.test(mobile)){alert("Mobile number must contain exactly 10 digits.");return false} 
+
+if(movie==""){alert("Please select a movie.");return false} 
+
+if(tickets==""){alert("Please select number of tickets.");return false} 
+
+return confirm("Do you want to confirm your movie booking?"); 
+
+} 
+
+function showMovie(){ 
+
+var movie=document.getElementById("movie").value; 
+
+if(movie!=""){alert("You selected: "+movie);} 
+
+} 
+
+</script> 
+
+</head> 
+
+<body> 
+
+<div class="header"> 
+
+<h1>MOVIE TICKET BOOKING</h1> 
+
+<p><i>Book your favorite movie tickets quickly and easily.</i></p> 
+
+</div> 
+
+<hr> 
+
+<div class="nav"> 
+
+<table border="1"> 
+
+<tr> 
+
+<th><a href="index.html">Home</a></th> 
+
+<th><a href="movie.html">Movie</a></th> 
+
+<th>Train</th> 
+
+<th>Bus</th> 
+
+<th>Two Wheeler</th> 
+
+</tr> 
+
+</table> 
+
+</div> 
+
+<hr> 
+
+<center> 
+
+<h2>Now Showing</h2> 
+
+<table border="1" cellpadding="10" class="movie-table"> 
+
+<tr> 
+
+<th>Poster</th> 
+
+<th>Movie</th> 
+
+<th>Language</th> 
+
+<th>Timing</th> 
+
+<th>Price</th> 
+
+</tr> 
+
+<tr> 
+
+<td><img src="https://wallpaperaccess.com/full/1161069.jpg" width="220" height="150"></td> 
+
+<td>Toy Story</td> 
+
+<td>English</td> 
+
+<td>9:00 PM - 12:00 AM</td> 
+
+<td>₹180</td> 
+
+</tr> 
+
+<tr> 
+
+<td><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQapBFgz7hQUlOqARyNlWy_8HJFSSe3UogdGchk6TL0NRX7YEIijZ-qnwUB&s=10" width="220" height="150"></td> 
+
+<td>Geetha Govindham</td> 
+
+<td>Telugu</td> 
+
+<td>6:00 PM - 8:30 PM</td> 
+
+<td>₹150</td> 
+
+</tr> 
+
+<tr> 
+
+<td><img src="https://data1.ibtimes.co.in/photo/en/full/70522/fidaa-upcoming-telugu-film-written-directed-by-sekhar-kammula-produced-by-dil-raju.jpg?w=900" width="220" height="150"></td> 
+
+<td>Fidaa</td> 
+
+<td>Telugu</td> 
+
+<td>3:00 PM - 6:00 PM</td> 
+
+<td>₹170</td> 
+
+</tr> 
+
+</table> 
+
+</center> 
+
+<hr> 
+
+<h2>Facilities Available</h2> 
+
+<ul> 
+
+<li>Dolby Atmos Sound</li> 
+
+<li>Comfortable Seats</li> 
+
+<li>Air Conditioned Theatre</li> 
+
+<li>Online Seat Selection</li> 
+
+<li>Food Court Available</li> 
+
+</ul> 
+
+<hr> 
+
+<h2>Booking Instructions</h2> 
+
+<ol> 
+
+<li>Select your movie.</li> 
+
+<li>Choose the number of seats.</li> 
+
+<li>Enter your details.</li> 
+
+<li>Confirm your booking.</li> 
+
+<li>Collect your ticket at the entrance.</li> 
+
+</ol> 
+
+<hr> 
+
+<center> 
+
+<h2>Movie Ticket Booking Form</h2> 
+
+<form action="MovieServlet" method="post" onsubmit="return validateMovieForm()"> 
+
+<table border="1" cellpadding="8" class="booking-form"> 
+
+<tr> 
+
+<td>Name</td> 
+
+<td><input type="text" id="name" name="userName" placeholder="Enter your name"></td> 
+
+</tr> 
+
+<tr> 
+
+<td>Mobile Number</td> 
+
+<td><input type="tel" id="mobile" name="mobile" placeholder="Enter 10 digit mobile number"></td> 
+
+</tr> 
+
+<tr> 
+
+<td>Select Movie</td> 
+
+<td><select id="movie" name="movieName" onchange="showMovie()"> 
+
+<option value="">-- Select Movie --</option> 
+
+<option value="Toy Story">Toy Story</option> 
+
+<option value="Geetha Govindham">Geetha Govindham</option> 
+
+<option value="Fidaa">Fidaa</option> 
+
+</select></td> 
+
+</tr> 
+
+<tr> 
+
+<td>Select Timing</td> 
+
+<td><select name="timing"> 
+
+<option value="3:00 PM - 6:00 PM">3:00 PM - 6:00 PM</option> 
+
+<option value="6:00 PM - 8:30 PM">6:00 PM - 8:30 PM</option> 
+
+<option value="9:00 PM - 12:00 AM">9:00 PM - 12:00 AM</option> 
+
+</select></td> 
+
+</tr> 
+
+<tr> 
+
+<td>Number of Tickets</td> 
+
+<td><select id="tickets" name="numTickets"> 
+
+<option value="">-- Select --</option> 
+
+<option value="1">1</option> 
+
+<option value="2">2</option> 
+
+<option value="3">3</option> 
+
+<option value="4">4</option> 
+
+<option value="5">5</option> 
+
+</select></td> 
+
+</tr> 
+
+<tr> 
+
+<td>Seat Type</td> 
+
+<td><input type="radio" name="seatType" value="Silver" checked>Silver 
+
+<input type="radio" name="seatType" value="Gold">Gold 
+
+<input type="radio" name="seatType" value="Platinum">Platinum</td> 
+
+</tr> 
+
+<tr> 
+
+<td>Snacks Required</td> 
+
+<td><input type="checkbox" name="snacks" value="Popcorn">Popcorn 
+
+<input type="checkbox" name="snacks" value="Cold Drink">Cold Drink 
+
+<input type="checkbox" name="snacks" value="Combo Meal">Combo Meal</td> 
+
+</tr> 
+
+<tr> 
+
+<td>Additional Request</td> 
+
+<td><textarea name="additionalRequest" rows="4" cols="30" placeholder="Enter any additional request"></textarea></td> 
+
+</tr> 
+
+<tr> 
+
+<td colspan="2" align="center"><input type="submit" value="Confirm Booking"> 
+
+<input type="reset" value="Clear"></td> 
+
+</tr> 
+
+</table> 
+
+</form> 
+
+</center> 
+
+<hr> 
+
+<center> 
+
+<h2>Movie Ticket Price</h2> 
+
+<table border="1" cellpadding="10"> 
+
+<tr> 
+
+<th>Seat Type</th> 
+
+<th>Price</th> 
+
+</tr> 
+
+<tr> 
+
+<td>Silver</td> 
+
+<td>₹150</td> 
+
+</tr> 
+
+<tr> 
+
+<td>Gold</td> 
+
+<td>₹200</td> 
+
+</tr> 
+
+<tr> 
+
+<td>Platinum</td> 
+
+<td>₹300</td> 
+
+</tr> 
+
+</table> 
+
+</center> 
+
+<hr> 
+
+<div class="footer"> 
+
+<h3>Quick Links</h3> 
+
+<a href="index.html">Home</a> 
+
+&nbsp; | &nbsp; 
+
+<a href="movie.html">Movie Booking</a> 
+
+<hr> 
+
+<h3>Thank You for Choosing Our Movie Booking Service!</h3> 
+
+</div> 
+
+</body> 
+
+</html> 
+
+ 
+
+MovieServlet: 
+
+package com.ticket; 
+
+import java.io.IOException; 
+
+import java.io.PrintWriter; 
+
+import java.sql.Connection; 
+
+import java.sql.DriverManager; 
+
+import java.sql.PreparedStatement; 
+
+import java.sql.ResultSet; 
+
+import java.sql.SQLException; 
+
+import javax.servlet.ServletException; 
+
+import javax.servlet.annotation.WebServlet; 
+
+import javax.servlet.http.HttpServlet; 
+
+import javax.servlet.http.HttpServletRequest; 
+
+import javax.servlet.http.HttpServletResponse; 
+
+@WebServlet("/MovieServlet") 
+
+public class MovieServlet extends HttpServlet { 
+
+@Override 
+
+protected void doPost(HttpServletRequest request,HttpServletResponse response)throws ServletException,IOException { 
+
+response.setContentType("text/html"); 
+
+PrintWriter out=response.getWriter(); 
+
+String userName=request.getParameter("userName"); 
+
+String mobile=request.getParameter("mobile"); 
+
+String movieName=request.getParameter("movieName"); 
+
+String timing=request.getParameter("timing"); 
+
+int numTickets=Integer.parseInt(request.getParameter("numTickets")); 
+
+String seatType=request.getParameter("seatType"); 
+
+String[] snackArray=request.getParameterValues("snacks"); 
+
+String snacks=""; 
+
+if(snackArray!=null){ 
+
+for(String snack:snackArray){ 
+
+snacks=snacks+snack+", "; 
+
+} 
+
+}else{ 
+
+snacks="No Snacks"; 
+
+} 
+
+String additionalRequest=request.getParameter("additionalRequest"); 
+
+Connection con=null; 
+
+try{ 
+
+Class.forName("com.mysql.cj.jdbc.Driver"); 
+
+con=DriverManager.getConnection("jdbc:mysql://localhost:3306/servlet"+"?useSSL=false"+"&allowPublicKeyRetrieval=true"+"&serverTimezone=UTC","root","mysql"); 
+
+String insertSQL="INSERT INTO movie_bookings "+"(user_name,mobile,movie_name,timing,"+"num_tickets,seat_type,snacks,"+"additional_request) "+"VALUES(?,?,?,?,?,?,?,?)"; 
+
+PreparedStatement insert=con.prepareStatement(insertSQL); 
+
+insert.setString(1,userName); 
+
+insert.setString(2,mobile); 
+
+insert.setString(3,movieName); 
+
+insert.setString(4,timing); 
+
+insert.setInt(5,numTickets); 
+
+insert.setString(6,seatType); 
+
+insert.setString(7,snacks); 
+
+insert.setString(8,additionalRequest); 
+
+insert.executeUpdate(); 
+
+String selectSQL="SELECT * FROM movie_bookings "+"ORDER BY booking_id DESC"; 
+
+PreparedStatement select=con.prepareStatement(selectSQL); 
+
+ResultSet rs=select.executeQuery(); 
+
+out.println("<html>"); 
+
+out.println("<head>"); 
+
+out.println("<title>Movie Booking Details</title>"); 
+
+out.println("<style>"); 
+
+out.println("body {"+"font-family: Arial;"+"background-color: lightyellow;"+"text-align:center;"+"}"); 
+
+out.println("table {"+"margin:auto;"+"border-collapse:collapse;"+"background-color:white;"+"}"); 
+
+out.println("th,td {"+"border:1px solid black;"+"padding:10px;"+"}"); 
+
+out.println("th {"+"background-color:lightblue;"+"}"); 
+
+out.println("h2 {"+"color:green;"+"}"); 
+
+out.println("</style>"); 
+
+out.println("</head>"); 
+
+out.println("<body>"); 
+
+out.println("<h2>Movie Booking Successful!</h2>"); 
+
+out.println("<h3>Saved Booking Details</h3>"); 
+
+out.println("<table>"); 
+
+out.println("<tr>"); 
+
+out.println("<th>Booking ID</th>"); 
+
+out.println("<th>Name</th>"); 
+
+out.println("<th>Mobile</th>"); 
+
+out.println("<th>Movie</th>"); 
+
+out.println("<th>Timing</th>"); 
+
+out.println("<th>Tickets</th>"); 
+
+out.println("<th>Seat Type</th>"); 
+
+out.println("<th>Snacks</th>"); 
+
+out.println("<th>Request</th>"); 
+
+out.println("<th>Booking Date</th>"); 
+
+out.println("</tr>"); 
+
+while(rs.next()){ 
+
+out.println("<tr>"); 
+
+out.println("<td>"+rs.getInt("booking_id")+"</td>"); 
+
+out.println("<td>"+rs.getString("user_name")+"</td>"); 
+
+out.println("<td>"+rs.getString("mobile")+"</td>"); 
+
+out.println("<td>"+rs.getString("movie_name")+"</td>"); 
+
+out.println("<td>"+rs.getString("timing")+"</td>"); 
+
+out.println("<td>"+rs.getInt("num_tickets")+"</td>"); 
+
+out.println("<td>"+rs.getString("seat_type")+"</td>"); 
+
+out.println("<td>"+rs.getString("snacks")+"</td>"); 
+
+out.println("<td>"+rs.getString("additional_request")+"</td>"); 
+
+out.println("<td>"+rs.getTimestamp("booking_date")+"</td>"); 
+
+out.println("</tr>"); 
+
+} 
+
+out.println("</table>"); 
+
+out.println("<br><br>"); 
+
+out.println("<a href='movie.html'>"+"Book Another Movie"+"</a>"); 
+
+out.println("&nbsp;&nbsp;"); 
+
+out.println("<a href='index.html'>"+"Home"+"</a>"); 
+
+out.println("</body>"); 
+
+out.println("</html>"); 
+
+rs.close(); 
+
+select.close(); 
+
+insert.close(); 
+
+} 
+
+catch(ClassNotFoundException e){ 
+
+out.println("<h3>JDBC Driver Not Found</h3>"); 
+
+out.println(e.getMessage()); 
+
+} 
+
+catch(SQLException e){ 
+
+out.println("<h3>Database Error</h3>"); 
+
+out.println(e.getMessage()); 
+
+} 
+
+finally{ 
+
+try{ 
+
+if(con!=null){ 
+
+con.close(); 
+
+} 
+
+}catch(SQLException e){ 
+
+e.printStackTrace(); 
+
+} 
+
+out.close(); 
+
+} 
+
+} 
+
+} 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
