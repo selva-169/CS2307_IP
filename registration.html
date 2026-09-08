@@ -1,0 +1,1001 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Online Job Portal</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-image: url("https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?q=80&w=1172&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 900px;
+            margin: 30px auto;
+            background: rgba(255, 255, 255, 0.94);
+            padding: 25px;
+            border-radius: 10px;
+        }
+
+        h1 {
+            color: #222;
+        }
+
+        h2, h3 {
+            color: #333;
+        }
+
+        hr {
+            width: 80%;
+        }
+
+        nav {
+            text-align: center;
+            margin: 15px 0;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #1b4ea9;
+            font-weight: bold;
+            margin: 0 10px;
+            cursor: pointer;
+        }
+
+        nav a:hover {
+            color: red;
+        }
+
+        .home-section {
+            text-align: center;
+        }
+
+        .home-section img {
+            width: 500px;
+            max-width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        table {
+            background-color: white;
+            border-collapse: collapse;
+            margin: auto;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid black;
+        }
+
+        th {
+            background-color: #ddd;
+        }
+
+        .categories {
+            display: inline-block;
+            text-align: left;
+        }
+
+        /* Registration */
+
+        #registerSection {
+            display: none;
+        }
+
+        .form-box {
+            width: 100%;
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background: white;
+        }
+
+        .form-box h2 {
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-top: 12px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="number"],
+        input[type="password"],
+        input[type="file"] {
+            width: 100%;
+            padding: 9px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        input[type="radio"],
+        input[type="checkbox"] {
+            margin-right: 5px;
+        }
+
+        .radio-group,
+        .checkbox-group {
+            margin-top: 8px;
+        }
+
+        .error {
+            color: red;
+            font-size: 13px;
+            margin-top: 3px;
+        }
+
+        .success {
+            color: green;
+            text-align: center;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        .valid {
+            border: 2px solid green !important;
+        }
+
+        .invalid {
+            border: 2px solid red !important;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 20px;
+            background: #2d6cdf;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1b4ea9;
+        }
+
+        .home-btn {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            color: #1b4ea9;
+            text-decoration: none;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 25px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- NAVIGATION -->
+    <nav>
+        <a onclick="showHome()">Home</a> |
+        <a onclick="showRegister()">Register</a> |
+        <a onclick="showRegister()">Login</a>
+    </nav>
+
+    <!-- ================= HOME SECTION ================= -->
+
+    <section id="homeSection" class="home-section">
+
+        <h1>ONLINE JOB PORTAL</h1>
+
+        <hr>
+
+        <h2>Welcome to the Online Job Portal</h2>
+
+        <p>
+            Find your dream job and build your career with us.
+            Register to apply for jobs and login to manage your applications.
+        </p>
+
+        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D">
+        <br><br>
+
+        <h3>Why Choose Our Job Portal?</h3>
+
+        <table>
+            <tr>
+                <th>Feature</th>
+                <th>Description</th>
+            </tr>
+
+            <tr>
+                <td>Easy Registration</td>
+                <td>Create your account in minutes.</td>
+            </tr>
+
+            <tr>
+                <td>Latest Job Openings</td>
+                <td>Explore jobs from various companies.</td>
+            </tr>
+
+            <tr>
+                <td>Secure Login</td>
+                <td>Access your profile and job applications safely.</td>
+            </tr>
+
+            <tr>
+                <td>Quick Apply</td>
+                <td>Apply for jobs with a single click.</td>
+            </tr>
+        </table>
+
+        <br>
+
+        <h3>Available Job Categories</h3>
+
+        <ul class="categories">
+            <li>Software Developer</li>
+            <li>Web Designer</li>
+            <li>Data Analyst</li>
+            <li>Digital Marketing</li>
+            <li>Technical Support</li>
+        </ul>
+
+        <footer>
+            <p>
+                <b>&copy; 2026 Online Job Portal. All Rights Reserved.</b>
+            </p>
+        </footer>
+
+    </section>
+
+
+    <!-- ================= REGISTRATION SECTION ================= -->
+
+    <section id="registerSection">
+
+        <div class="form-box">
+
+            <h2>Job Registration</h2>
+
+            <form id="registrationForm">
+
+                <!-- Full Name -->
+                <label>Full Name *</label>
+
+                <input type="text" id="fullName">
+
+                <div class="error" id="fullNameError"></div>
+
+
+                <!-- Email -->
+                <label>Email *</label>
+
+                <input type="email" id="email">
+
+                <div class="error" id="emailError"></div>
+
+
+                <!-- Phone -->
+                <label>Phone Number *</label>
+
+                <input type="text" id="phone">
+
+                <div class="error" id="phoneError"></div>
+
+
+                <!-- Password -->
+                <label>Password *</label>
+
+                <input type="password" id="password">
+
+                <div class="error" id="passwordError"></div>
+
+
+                <!-- Confirm Password -->
+                <label>Confirm Password *</label>
+
+                <input type="password" id="confirmPassword">
+
+                <div class="error" id="confirmPasswordError"></div>
+
+
+                <!-- Job Title -->
+                <label>Desired Job Title *</label>
+
+                <input type="text" id="jobTitle">
+
+                <div class="error" id="jobTitleError"></div>
+
+
+                <!-- Experience -->
+                <label>Years of Experience *</label>
+
+                <input type="number" id="experience" min="0">
+
+                <div class="error" id="experienceError"></div>
+
+
+                <!-- Github -->
+                <label>Github Link *</label>
+
+                <input
+                    type="text"
+                    id="githubLink"
+                    placeholder="https://github.com/username">
+
+                <div class="error" id="githubLinkError"></div>
+
+
+                <!-- Resume -->
+                <label>Upload Resume *</label>
+
+                <input
+                    type="file"
+                    id="resumeFile"
+                    accept=".pdf,.doc,.docx">
+
+                <div class="error" id="resumeFileError"></div>
+
+
+                <!-- Gender -->
+                <label>Gender *</label>
+
+                <div class="radio-group">
+
+                    <input
+                        type="radio"
+                        name="gender"
+                        value="Male">
+                    Male
+
+                    <input
+                        type="radio"
+                        name="gender"
+                        value="Female">
+                    Female
+
+                    <input
+                        type="radio"
+                        name="gender"
+                        value="Other">
+                    Other
+
+                </div>
+
+                <div class="error" id="genderError"></div>
+
+
+                <!-- Skills -->
+                <label>Skills *</label>
+
+                <div class="checkbox-group">
+
+                    <input
+                        type="checkbox"
+                        name="skills"
+                        value="HTML">
+                    HTML
+
+                    <input
+                        type="checkbox"
+                        name="skills"
+                        value="CSS">
+                    CSS
+
+                    <input
+                        type="checkbox"
+                        name="skills"
+                        value="JavaScript">
+                    JavaScript
+
+                    <input
+                        type="checkbox"
+                        id="otherSkillCheck">
+                    Others
+
+                    <br><br>
+
+                    <input
+                        type="text"
+                        id="otherSkill"
+                        placeholder="Enter Other Skill"
+                        style="display:none;">
+
+                </div>
+
+                <div class="error" id="skillsError"></div>
+
+
+                <!-- Terms -->
+                <br>
+
+                <input type="checkbox" id="terms">
+
+                I agree to the Terms & Conditions
+
+                <div class="error" id="termsError"></div>
+
+
+                <!-- Register -->
+                <button type="submit">
+                    Register
+                </button>
+
+                <div
+                    class="success"
+                    id="successMsg">
+                </div>
+
+            </form>
+
+            <a
+                class="home-btn"
+                onclick="showHome()">
+                ← Back to Home
+            </a>
+
+        </div>
+
+    </section>
+
+</div>
+
+
+<!-- ================= JAVASCRIPT ================= -->
+
+<script>
+
+    // Show Home
+    function showHome() {
+
+        document.getElementById("homeSection").style.display = "block";
+
+        document.getElementById("registerSection").style.display = "none";
+
+        window.scrollTo(0, 0);
+    }
+
+
+    // Show Registration
+    function showRegister() {
+
+        document.getElementById("homeSection").style.display = "none";
+
+        document.getElementById("registerSection").style.display = "block";
+
+        window.scrollTo(0, 0);
+    }
+
+
+    // Other Skill
+    const otherCheck =
+        document.getElementById("otherSkillCheck");
+
+    const otherInput =
+        document.getElementById("otherSkill");
+
+
+    otherCheck.addEventListener("change", function () {
+
+        if (this.checked) {
+
+            otherInput.style.display = "block";
+
+            otherInput.focus();
+
+        } else {
+
+            otherInput.style.display = "none";
+
+            otherInput.value = "";
+        }
+
+    });
+
+
+    // Registration Validation
+    document
+        .getElementById("registrationForm")
+        .addEventListener("submit", function(e) {
+
+        e.preventDefault();
+
+        let isValid = true;
+
+
+        // Clear errors
+        document
+            .querySelectorAll(".error")
+            .forEach(function(error) {
+
+                error.textContent = "";
+            });
+
+
+        // Clear success message
+        document
+            .getElementById("successMsg")
+            .textContent = "";
+
+
+        // Clear borders
+        document
+            .querySelectorAll("input")
+            .forEach(function(input) {
+
+                input.classList.remove(
+                    "valid",
+                    "invalid"
+                );
+            });
+
+
+        // ================= FULL NAME =================
+
+        let fullName =
+            document.getElementById("fullName");
+
+        let namePattern =
+            /^[A-Za-z ]+$/;
+
+
+        if (fullName.value.trim() === "") {
+
+            document.getElementById("fullNameError")
+                .textContent =
+                "Full name is required.";
+
+            fullName.classList.add("invalid");
+
+            isValid = false;
+
+        }
+
+        else if (!namePattern.test(
+            fullName.value.trim()
+        )) {
+
+            document.getElementById("fullNameError")
+                .textContent =
+                "Only alphabets and spaces are allowed.";
+
+            fullName.classList.add("invalid");
+
+            isValid = false;
+
+        }
+
+        else {
+
+            fullName.classList.add("valid");
+        }
+
+
+        // ================= EMAIL =================
+
+        let email =
+            document.getElementById("email");
+
+        let emailPattern =
+            /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+
+        if (email.value.trim() === "") {
+
+            document.getElementById("emailError")
+                .textContent =
+                "Email is required.";
+
+            email.classList.add("invalid");
+
+            isValid = false;
+
+        }
+
+        else if (!emailPattern.test(
+            email.value.trim()
+        )) {
+
+            document.getElementById("emailError")
+                .textContent =
+                "Invalid email.";
+
+            email.classList.add("invalid");
+
+            isValid = false;
+
+        }
+
+        else {
+
+            email.classList.add("valid");
+        }
+
+
+        // ================= PHONE =================
+
+        let phone =
+            document.getElementById("phone");
+
+        let phonePattern =
+            /^[0-9]{10}$/;
+
+
+        if (phone.value.trim() === "") {
+
+            document.getElementById("phoneError")
+                .textContent =
+                "Phone number required.";
+
+            phone.classList.add("invalid");
+
+            isValid = false;
+
+        }
+
+        else if (!phonePattern.test(
+            phone.value.trim()
+        )) {
+
+            document.getElementById("phoneError")
+                .textContent =
+                "Enter 10 digit phone number.";
+
+            phone.classList.add("invalid");
+
+            isValid = false;
+
+        }
+
+        else {
+
+            phone.classList.add("valid");
+        }
+
+
+        // ================= PASSWORD =================
+
+        let password =
+            document.getElementById("password");
+
+        let passwordPattern =
+            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{6,}$/;
+
+
+        if (password.value === "") {
+
+            document.getElementById("passwordError")
+                .textContent =
+                "Password is required.";
+
+            password.classList.add("invalid");
+
+            isValid = false;
+
+        }
+
+        else if (!passwordPattern.test(
+            password.value
+        )) {
+
+            document.getElementById("passwordError")
+                .textContent =
+                "Password must contain uppercase, lowercase, number and special character.";
+
+            password.classList.add("invalid");
+
+            isValid = false;
+
+        }
+
+        else {
+
+            password.classList.add("valid");
+        }
+
+
+        // ================= CONFIRM PASSWORD =================
+
+        let confirmPassword =
+            document.getElementById("confirmPassword");
+
+
+        if (confirmPassword.value === "") {
+
+            document.getElementById("confirmPasswordError")
+                .textContent =
+                "Confirm your password.";
+
+            confirmPassword.classList.add("invalid");
+
+            isValid = false;
+
+        }
+
+        else if (
+            password.value !== confirmPassword.value
+        ) {
+
+            document.getElementById("confirmPasswordError")
+                .textContent =
+                "Passwords do not match.";
+
+            confirmPassword.classList.add("invalid");
+
+            isValid = false;
+
+        }
+
+        else {
+
+            confirmPassword.classList.add("valid");
+        }
+
+
+        // ================= JOB TITLE =================
+
+        let jobTitle =
+            document.getElementById("jobTitle");
+
+
+        if (jobTitle.value.trim() === "") {
+
+            document.getElementById("jobTitleError")
+                .textContent =
+                "Job title required.";
+
+            jobTitle.classList.add("invalid");
+
+            isValid = false;
+
+        }
+
+        else {
+
+            jobTitle.classList.add("valid");
+        }
+
+
+        // ================= EXPERIENCE =================
+
+        let experience =
+            document.getElementById("experience");
+
+
+        if (experience.value.trim() === "") {
+
+            document.getElementById("experienceError")
+                .textContent =
+                "Experience is required.";
+
+            experience.classList.add("invalid");
+
+            isValid = false;
+
+        }
+
+        else if (experience.value < 0) {
+
+            document.getElementById("experienceError")
+                .textContent =
+                "Experience cannot be negative.";
+
+            experience.classList.add("invalid");
+
+            isValid = false;
+
+        }
+
+        else {
+
+            experience.classList.add("valid");
+        }
+
+
+        // ================= GITHUB =================
+
+        let githubLink =
+            document.getElementById("githubLink");
+
+        let urlPattern =
+            /^https?:\/\/[^\s]+$/;
+
+
+        if (githubLink.value.trim() === "") {
+
+            document.getElementById("githubLinkError")
+                .textContent =
+                "Github link required.";
+
+            githubLink.classList.add("invalid");
+
+            isValid = false;
+
+        }
+
+        else if (!urlPattern.test(
+            githubLink.value.trim()
+        )) {
+
+            document.getElementById("githubLinkError")
+                .textContent =
+                "Enter valid URL.";
+
+            githubLink.classList.add("invalid");
+
+            isValid = false;
+
+        }
+
+        else {
+
+            githubLink.classList.add("valid");
+        }
+
+
+        // ================= RESUME =================
+
+        let resumeInput =
+            document.getElementById("resumeFile");
+
+        let file =
+            resumeInput.files[0];
+
+
+        if (!file) {
+
+            document.getElementById("resumeFileError")
+                .textContent =
+                "Please upload your resume.";
+
+            isValid = false;
+
+        }
+
+        else {
+
+            let allowed = [
+                "application/pdf",
+                "application/msword",
+                "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+            ];
+
+
+            if (!allowed.includes(file.type)) {
+
+                document.getElementById("resumeFileError")
+                    .textContent =
+                    "Only PDF, DOC or DOCX files are allowed.";
+
+                isValid = false;
+            }
+        }
+
+
+        // ================= GENDER =================
+
+        let gender =
+            document.querySelector(
+                'input[name="gender"]:checked'
+            );
+
+
+        if (!gender) {
+
+            document.getElementById("genderError")
+                .textContent =
+                "Select gender.";
+
+            isValid = false;
+        }
+
+
+        // ================= SKILLS =================
+
+        let skills =
+            document.querySelectorAll(
+                'input[name="skills"]:checked'
+            );
+
+        let otherChecked =
+            document.getElementById(
+                "otherSkillCheck"
+            ).checked;
+
+
+        if (
+            skills.length === 0 &&
+            !otherChecked
+        ) {
+
+            document.getElementById("skillsError")
+                .textContent =
+                "Select at least one skill.";
+
+            isValid = false;
+        }
+
+        else if (
+            otherChecked &&
+            otherInput.value.trim() === ""
+        ) {
+
+            document.getElementById("skillsError")
+                .textContent =
+                "Please enter your other skill.";
+
+            isValid = false;
+        }
+
+
+        // ================= TERMS =================
+
+        if (
+            !document
+                .getElementById("terms")
+                .checked
+        ) {
+
+            document.getElementById("termsError")
+                .textContent =
+                "Accept Terms & Conditions.";
+
+            isValid = false;
+        }
+
+
+        // ================= SUCCESS =================
+
+        if (isValid) {
+
+            document.getElementById("successMsg")
+                .textContent =
+                "Registration Successful!";
+
+            alert("Registration Successful!");
+
+            document
+                .getElementById("registrationForm")
+                .reset();
+
+            otherInput.style.display = "none";
+
+            document
+                .querySelectorAll("input")
+                .forEach(function(input) {
+
+                    input.classList.remove(
+                        "valid",
+                        "invalid"
+                    );
+                });
+        }
+
+    });
+
+</script>
+
+</body>
+</html>
+
