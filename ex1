@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Online Ticket Booking System</title>
+</head>
+
+<body>
+
+<h1 align="center">ONLINE TICKET BOOKING SYSTEM</h1>
+
+<hr>
+
+<h2>Home</h2>
+
+<p>Welcome to the ticket booking portal. Select a service below.</p>
+
+<ul>
+    <li><a href="#movie">Movie Ticket Booking</a></li>
+    <li><a href="#event">Event Ticket Booking</a></li>
+    <li><a href="#bus">Bus Ticket Booking</a></li>
+    <li><a href="#train">Train Ticket Booking</a></li>
+</ul>
+
+<h3>Our Services</h3>
+
+<p>
+    - Easy Ticket Booking<br>
+    - Fast Confirmation<br>
+    - Safe and Secure
+</p>
+
+<p><b>Thank you for visiting our website!</b></p>
+
+<hr>
+
+<!-- MOVIE -->
+
+<h2 id="movie">Movie Ticket Reservation</h2>
+
+<p>Welcome to the Movie registration system. Enjoy your day with us.</p>
+
+<img src="leo.jpg" alt="Movie Poster" width="250" height="300">
+
+<h3>Available Movies</h3>
+
+<ul>
+    <li>Leo</li>
+    <li>Vikram</li>
+    <li>Jailer</li>
+</ul>
+
+<form>
+
+<fieldset>
+
+<legend><b>Booking Details</b></legend>
+
+<label>Name:</label>
+<input type="text">
+<br><br>
+
+<label>Email:</label>
+<input type="email">
+<br><br>
+
+<label>Phone:</label>
+<input type="tel">
+<br><br>
+
+<label>Select Movie:</label>
+
+<select>
+    <option>Leo</option>
+    <option>Vikram</option>
+    <option>Jailer</option>
+</select>
+
+<br><br>
+
+<label>Number of Tickets:</label>
+
+<select>
+    <option>1</option>
+    <option>2</option>
+    <option>3</option>
+    <option>4</option>
+</select>
+
+<br><br>
+
+<input type="submit" value="Book Ticket">
+<input type="reset" value="Clear">
+
+</fieldset>
+
+</form>
+
+<h3>Ticket Price</h3>
+
+<table border="1" cellpadding="8">
+
+<tr>
+    <th>Movie</th>
+    <th>Price</th>
+</tr>
+
+<tr>
+    <td>Leo</td>
+    <td>₹200</td>
+</tr>
+
+<tr>
+    <td>Vikram</td>
+    <td>₹180</td>
+</tr>
+
+<tr>
+    <td>Jailer</td>
+    <td>₹150</td>
+</tr>
+
+</table>
+
+<p><a href="#top">Back to Home</a></p>
+
+<hr>
+
+<!-- EVENT -->
+
+<h2 id="event">Event Ticket Reservation</h2>
+
+<p>
+Welcome to the Event registration system.
+Create your best memories with us.
+</p>
+
+<img src="eve.jpg" alt="Event Banner" width="300" height="200">
+
+<h3>Available Events</h3>
+
+<ul>
+    <li>Music Concert</li>
+    <li>Tech Seminar</li>
+    <li>Dance Competition</li>
+    <li>Food Festival</li>
+</ul>
+
+<form>
+
+<fieldset>
+
+<legend><b>Reservation Details</b></legend>
+
+<label>Full Name:</label>
+<input type="text">
+<br><br>
+
+<label>Email:</label>
+<input type="email">
+<br><br>
+
+<label>Phone Number:</label>
+<input type="tel">
+<br><br>
+
+<label>Select Event:</label>
+
+<select>
+    <option>Music Concert</option>
+    <option>Tech Seminar</option>
+    <option>Dance Competition</option>
+    <option>Food Festival</option>
+</select>
+
+<br><br>
+
+<label>Number of Tickets:</label>
+
+<select>
+    <option>1</option>
+    <option>2</option>
+    <option>3</option>
+    <option>4</option>
+    <option>5</option>
+</select>
+
+<br><br>
+
+<input type="submit" value="Reserve Ticket">
+
+</fieldset>
+
+</form>
+
+<h3>Event Ticket Price</h3>
+
+<table border="1" cellpadding="8">
+
+<tr>
+    <th>Event</th>
+    <th>Price</th>
+</tr>
+
+<tr>
+    <td>Music Concert</td>
+    <td>₹500</td>
+</tr>
+
+<tr>
+    <td>Tech Seminar</td>
+    <td>₹300</td>
+</tr>
+
+<tr>
+    <td>Dance Competition</td>
+    <td>₹250</td>
+</tr>
+
+<tr>
+    <td>Food Festival</td>
+    <td>₹150</td>
+</tr>
+
+</table>
+
+<p><a href="#top">Back to Home</a></p>
+
+<hr>
+
+<!-- BUS -->
+
+<h2 id="bus">Bus Ticket Reservation</h2>
+
+<p>
+Welcome to the Bus Reservation System.
+Please fill in your details, choose your travel destination and bus.
+</p>
+
+<img src="bus.jpg" alt="Bus Image" width="300" height="180">
+
+<h3>Available Bus Routes</h3>
+
+<ul>
+    <li>Chennai-Madurai</li>
+    <li>Coimbatore-Salem</li>
+    <li>Trichy-Chennai</li>
+    <li>Madurai-Bangalore</li>
+</ul>
+
+<form>
+
+<fieldset>
+
+<legend><b>Passenger Details</b></legend>
+
+<label>Name:</label>
+<input type="text">
+<br><br>
+
+<label>Email:</label>
+<input type="email">
+<br><br>
+
+<label>Phone:</label>
+<input type="tel">
+<br><br>
+
+<label>Select Route:</label>
+
+<select>
+    <option>Select Route</option>
+    <option>Chennai-Madurai</option>
+    <option>Coimbatore-Salem</option>
+    <option>Trichy-Chennai</option>
+    <option>Madurai-Bangalore</option>
+</select>
+
+<br><br>
+
+<label>Number of Tickets:</label>
+
+<select>
+    <option>Select</option>
+    <option>1 Ticket</option>
+    <option>2 Tickets</option>
+    <option>3 Tickets</option>
+    <option>4 Tickets</option>
+</select>
+
+<br><br>
+
+<input type="submit" value="Book Ticket">
+
+</fieldset>
+
+</form>
+
+<h3>Bus Fare Details</h3>
+
+<table border="1" cellpadding="8">
+
+<tr>
+    <th>Route</th>
+    <th>Fare</th>
+</tr>
+
+<tr>
+    <td>Chennai-Madurai</td>
+    <td>₹650</td>
+</tr>
+
+<tr>
+    <td>Coimbatore-Salem</td>
+    <td>₹300</td>
+</tr>
+
+<tr>
+    <td>Trichy-Chennai</td>
+    <td>₹450</td>
+</tr>
+
+<tr>
+    <td>Madurai-Bangalore</td>
+    <td>₹700</td>
+</tr>
+
+</table>
+
+<p><a href="#top">Back to Home</a></p>
+
+<hr>
+
+<!-- TRAIN -->
+
+<h2 id="train">Train Ticket Reservation</h2>
+
+<p>
+Welcome to the Train Ticket Reservation System.
+Fill in the details below to book your train ticket easily.
+</p>
+
+<img src="train.jpg" alt="Train Image" width="300" height="180">
+
+<h3>Available Train Routes</h3>
+
+<ul>
+    <li>Chennai-Madurai</li>
+    <li>Coimbatore-Chennai</li>
+    <li>Trichy-Bangalore</li>
+    <li>Madurai-Coimbatore</li>
+</ul>
+
+<form>
+
+<fieldset>
+
+<legend><b>Passenger Details</b></legend>
+
+<label>Passenger Name:</label>
+<input type="text">
+<br><br>
+
+<label>Email:</label>
+<input type="email">
+<br><br>
+
+<label>Phone Number:</label>
+<input type="tel">
+<br><br>
+
+<label>Select Train:</label>
+
+<select>
+
+    <option>Select Train</option>
+    <option>Express Train</option>
+    <option>Superfast Train</option>
+    <option>Passenger Train</option>
+
+</select>
+
+<br><br>
+
+<label>Number of Tickets:</label>
+
+<select>
+
+    <option>Select</option>
+    <option>1 Ticket</option>
+    <option>2 Tickets</option>
+    <option>3 Tickets</option>
+    <option>4 Tickets</option>
+
+</select>
+
+<br><br>
+
+<input type="submit" value="Book Ticket">
+<input type="reset" value="Clear">
+
+</fieldset>
+
+</form>
+
+<h3>Train Fare Details</h3>
+
+<table border="1" cellpadding="8">
+
+<tr>
+    <th>Route</th>
+    <th>Fare</th>
+</tr>
+
+<tr>
+    <td>Chennai-Madurai</td>
+    <td>₹450</td>
+</tr>
+
+<tr>
+    <td>Coimbatore-Chennai</td>
+    <td>₹350</td>
+</tr>
+
+<tr>
+    <td>Trichy-Bangalore</td>
+    <td>₹600</td>
+</tr>
+
+<tr>
+    <td>Madurai-Coimbatore</td>
+    <td>₹250</td>
+</tr>
+
+</table>
+
+<p><a href="#top">Back to Home</a></p>
+
+<hr>
+
+<h3 align="center">Thank You for Using Online Ticket Booking System</h3>
+
+</body>
+
+</html>
