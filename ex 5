@@ -1,0 +1,1923 @@
+<!DOCTYPE html> 
+
+<html lang="en"> 
+
+<head> 
+
+    <meta charset="UTF-8"> 
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+    <title>Exam Portal</title> 
+
+    <style> 
+
+        * { 
+
+            box-sizing: border-box; 
+
+        } 
+
+        body { 
+
+            margin: 0; 
+
+            min-height: 100vh; 
+
+            font-family: Arial, sans-serif; 
+
+            background: linear-gradient(135deg, #ddd6fe, #dbeafe); 
+
+            color: #1e293b; 
+
+        } 
+
+        #registrationPage { 
+
+            min-height: 100vh; 
+
+            display: flex; 
+
+            justify-content: center; 
+
+            align-items: center; 
+
+            padding: 20px; 
+
+        } 
+
+        .registration-container { 
+
+            width: 460px; 
+
+            max-width: 100%; 
+
+            background: rgba(255, 255, 255, 0.95); 
+
+            padding: 40px; 
+
+            border-radius: 16px; 
+
+            box-shadow: 0 15px 35px rgba(76, 29, 149, 0.2); 
+
+        } 
+
+        .header { 
+
+            text-align: center; 
+
+            margin-bottom: 30px; 
+
+        } 
+
+        .icon { 
+
+            width: 60px; 
+
+            height: 60px; 
+
+            margin: 0 auto 12px; 
+
+            border-radius: 50%; 
+
+            background: #7c3aed; 
+
+            color: white; 
+
+            display: flex; 
+
+            align-items: center; 
+
+            justify-content: center; 
+
+            font-size: 28px; 
+
+        } 
+
+        h1 { 
+
+            margin: 5px 0; 
+
+            color: #4c1d95; 
+
+            font-size: 28px; 
+
+        } 
+
+        .header p { 
+
+            color: #64748b; 
+
+            font-size: 14px; 
+
+        } 
+
+        .form-group { 
+
+            margin-bottom: 18px; 
+
+        } 
+
+ 
+
+        label { 
+
+            display: block; 
+
+            margin-bottom: 7px; 
+
+            color: #374151; 
+
+            font-weight: 600; 
+
+            font-size: 14px; 
+
+        } 
+
+        input, 
+
+        select { 
+
+            width: 100%; 
+
+            padding: 12px 14px; 
+
+            border: 1px solid #cbd5e1; 
+
+            border-radius: 10px; 
+
+            background: #f8fafc; 
+
+            color: #1e293b; 
+
+            font-size: 14px; 
+
+            transition: 0.3s; 
+
+        } 
+
+        input:focus, 
+
+        select:focus { 
+
+            outline: none; 
+
+            border-color: #8b5cf6; 
+
+            background: white; 
+
+            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.12); 
+
+        } 
+
+        .error { 
+
+            color: #ef4444; 
+
+            font-size: 12px; 
+
+            margin-top: 5px; 
+
+            min-height: 15px; 
+
+        } 
+
+        .start-btn, 
+
+        .submit-btn { 
+
+            width: 100%; 
+
+            padding: 14px; 
+
+            border: none; 
+
+            border-radius: 10px; 
+
+            background: linear-gradient(90deg, #7c3aed, #2563eb); 
+
+            color: white; 
+
+            font-size: 16px; 
+
+            font-weight: bold; 
+
+            cursor: pointer; 
+
+            transition: 0.3s; 
+
+        } 
+
+        .start-btn { 
+
+            margin-top: 8px; 
+
+        } 
+
+        .start-btn:hover, 
+
+        .submit-btn:hover { 
+
+            transform: translateY(-2px); 
+
+            box-shadow: 0 8px 18px rgba(79, 70, 229, 0.3); 
+
+        } 
+
+        .note { 
+
+            text-align: center; 
+
+            color: #94a3b8; 
+
+            font-size: 12px; 
+
+            margin-top: 18px; 
+
+        } 
+
+        #quizPage { 
+
+            display: none; 
+
+            min-height: 100vh; 
+
+            background: linear-gradient(135deg, #eef2ff, #f5f3ff); 
+
+        } 
+
+        .top-bar { 
+
+            background: linear-gradient(90deg, #4c1d95, #2563eb); 
+
+            color: white; 
+
+            padding: 30px 20px; 
+
+            text-align: center; 
+
+        } 
+
+        .top-bar h1 { 
+
+            margin: 0 0 8px; 
+
+            color: white; 
+
+            font-size: 30px; 
+
+        } 
+
+        .top-bar p { 
+
+            margin: 0; 
+
+            color: #e0e7ff; 
+
+        } 
+
+        .student-info { 
+
+            margin-top: 12px; 
+
+            font-size: 14px; 
+
+            color: #ddd6fe; 
+
+        } 
+
+        .quiz-container { 
+
+            width: 900px; 
+
+            max-width: 92%; 
+
+            margin: 30px auto 50px; 
+
+        } 
+
+        .instruction { 
+
+            background: white; 
+
+            padding: 18px 22px; 
+
+            border-radius: 12px; 
+
+            margin-bottom: 22px; 
+
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08); 
+
+            border: 1px solid #ddd6fe; 
+
+        } 
+
+        .instruction strong { 
+
+            color: #5b21b6; 
+
+        } 
+
+        .question-box { 
+
+            background: white; 
+
+            padding: 24px; 
+
+            margin-bottom: 20px; 
+
+            border-radius: 14px; 
+
+            box-shadow: 0 5px 16px rgba(0, 0, 0, 0.08); 
+
+            border-top: 4px solid #7c3aed; 
+
+        } 
+
+        .question-title { 
+
+            margin: 0 0 18px; 
+
+            color: #312e81; 
+
+            font-size: 18px; 
+
+        } 
+
+        .number { 
+
+            display: inline-flex; 
+
+            width: 30px; 
+
+            height: 30px; 
+
+            margin-right: 8px; 
+
+            align-items: center; 
+
+            justify-content: center; 
+
+            background: #ede9fe; 
+
+            color: #6d28d9; 
+
+            border-radius: 50%; 
+
+            font-size: 14px; 
+
+            font-weight: bold; 
+
+        } 
+
+        .choice { 
+
+            display: flex; 
+
+            align-items: center; 
+
+            padding: 12px 14px; 
+
+            margin: 9px 0; 
+
+            border: 1px solid #e2e8f0; 
+
+            border-radius: 9px; 
+
+            cursor: pointer; 
+
+            transition: 0.25s; 
+
+            background: #fafafa; 
+
+        } 
+
+        .choice:hover { 
+
+            background: #f5f3ff; 
+
+            border-color: #a78bfa; 
+
+        } 
+
+        .choice input { 
+
+            width: auto; 
+
+            margin-right: 12px; 
+
+            accent-color: #7c3aed; 
+
+            cursor: pointer; 
+
+        } 
+
+        .choice:has(input:checked) { 
+
+            background: #ede9fe; 
+
+            border-color: #8b5cf6; 
+
+        } 
+
+        .submit-section { 
+
+            background: white; 
+
+            padding: 25px; 
+
+            text-align: center; 
+
+            border-radius: 14px; 
+
+            box-shadow: 0 5px 16px rgba(0, 0, 0, 0.08); 
+
+        } 
+
+        .submit-section p { 
+
+            color: #64748b; 
+
+            margin-top: 0; 
+
+            font-size: 14px; 
+
+        } 
+
+        .submit-btn { 
+
+            width: auto; 
+
+            padding: 14px 50px; 
+
+            border-radius: 9px; 
+
+        } 
+
+        #resultPage { 
+
+            display: none; 
+
+            min-height: 100vh; 
+
+            justify-content: center; 
+
+            align-items: center; 
+
+            padding: 20px; 
+
+        } 
+
+        .result-container { 
+
+            width: 500px; 
+
+            max-width: 100%; 
+
+            background: white; 
+
+            padding: 40px; 
+
+            border-radius: 16px; 
+
+            text-align: center; 
+
+            box-shadow: 0 15px 35px rgba(76, 29, 149, 0.2); 
+
+        } 
+
+ 
+
+        .result-icon { 
+
+            width: 70px; 
+
+            height: 70px; 
+
+            margin: 0 auto 15px; 
+
+            border-radius: 50%; 
+
+            background: #22c55e; 
+
+            color: white; 
+
+            display: flex; 
+
+            justify-content: center; 
+
+            align-items: center; 
+
+            font-size: 35px; 
+
+        } 
+
+        .result-container h2 { 
+
+            color: #4c1d95; 
+
+            margin-bottom: 10px; 
+
+        } 
+
+        .score { 
+
+            font-size: 42px; 
+
+            font-weight: bold; 
+
+            color: #7c3aed; 
+
+            margin: 20px 0; 
+
+        } 
+
+        .result-message { 
+
+            color: #64748b; 
+
+            margin-bottom: 25px; 
+
+        } 
+
+        .restart-btn { 
+
+            border: none; 
+
+            padding: 13px 30px; 
+
+            border-radius: 9px; 
+
+            background: linear-gradient(90deg, #7c3aed, #2563eb); 
+
+            color: white; 
+
+            font-size: 15px; 
+
+            font-weight: bold; 
+
+            cursor: pointer; 
+
+        } 
+
+        @media (max-width: 520px) { 
+
+            .registration-container { 
+
+                padding: 28px; 
+
+            } 
+
+            .quiz-container { 
+
+                max-width: 94%; 
+
+            } 
+
+            .question-box { 
+
+                padding: 18px; 
+
+            } 
+
+            .top-bar h1 { 
+
+                font-size: 24px; 
+
+            } 
+
+            .submit-btn { 
+
+                width: 100%; 
+
+            } 
+
+        } 
+
+    </style> 
+
+</head> 
+
+<body> 
+
+    <section id="registrationPage"> 
+
+        <div class="registration-container"> 
+
+            <div class="header"> 
+
+ 
+
+                <div class="icon">✓</div> 
+
+                <h1>Exam Portal</h1> 
+
+                <p> 
+
+                    Register below to access your online examination 
+
+                </p> 
+
+            </div> 
+
+            <form id="registrationForm"> 
+
+                <div class="form-group"> 
+
+                    <label for="name">Full Name</label> 
+
+                    <input 
+
+                        type="text" 
+
+                        id="name" 
+
+                        placeholder="Enter your name" 
+
+                    > 
+
+                    <div class="error" id="nameError"></div> 
+
+                </div> 
+
+                <div class="form-group"> 
+
+                    <label for="roll">Student Roll No.</label> 
+
+                    <input 
+
+                        type="text" 
+
+                        id="roll" 
+
+                        placeholder="Example: CS2026001"> 
+
+                    <div class="error" id="rollError"></div> 
+
+                </div> 
+
+                <div class="form-group"> 
+
+                    <label for="email">Email</label> 
+
+                    <input 
+
+                        type="email" 
+
+                        id="email" 
+
+                        placeholder="Enter your email">              
+
+                    <div class="error" id="emailError"></div> 
+
+                </div> 
+
+                <div class="form-group"> 
+
+                    <label for="department">Department</label> 
+
+                    <select id="department"> 
+
+                        <option value=""> 
+
+                            Choose your department 
+
+                        </option> 
+
+                        <option value="CSE"> 
+
+                            Computer Science & Engineering 
+
+                        </option> 
+
+                        <option value="IT"> 
+
+                            Information Technology 
+
+                        </option> 
+
+                        <option value="ECE"> 
+
+                            Electronics & Communication 
+
+                        </option> 
+
+                        <option value="EEE"> 
+
+                            Electrical & Electronics 
+
+                        </option> 
+
+                    </select> 
+
+                    <div class="error" id="departmentError"></div> 
+
+                </div> 
+
+                <div class="form-group"> 
+
+                    <label for="semester"> 
+
+                        Current Semester 
+
+                    </label> 
+
+                    <select id="semester"> 
+
+                        <option value=""> 
+
+                            Choose semester 
+
+                        </option> 
+
+ 
+
+                      <option value="1"> 
+
+                            First Semester 
+
+                        </option> 
+
+                        <option value="2"> 
+
+                            Second Semester 
+
+                        </option> 
+
+                        <option value="3"> 
+
+                            Third Semester 
+
+                        </option> 
+
+                        <option value="4"> 
+
+                            Fourth Semester 
+
+                        </option> 
+
+                        <option value="5"> 
+
+                            Fifth Semester 
+
+                        </option> 
+
+                        <option value="6"> 
+
+                            Sixth Semester 
+
+                        </option> 
+
+                    </select> 
+
+                    <div class="error" id="semesterError"></div> 
+
+                </div> 
+
+                <button 
+
+                    class="start-btn" 
+
+                    type="submit”> 
+
+                    Start Examination → 
+
+                </button> 
+
+            </form> 
+
+            <div class="note"> 
+
+                Please verify your details before starting the exam. 
+
+            </div> 
+
+        </div> 
+
+    </section> 
+
+    <section id="quizPage"> 
+
+        <header class="top-bar"> 
+
+            <h1>Web Technology Assessment</h1> 
+
+            <p> 
+
+                Test your knowledge of HTML, CSS and JavaScript 
+
+            </p> 
+
+            <div class="student-info" id="studentInfo"></div> 
+
+        </header> 
+
+        <main class="quiz-container"> 
+
+            <div class="instruction"> 
+
+                <strong>Instructions:</strong> 
+
+                Select one answer for every question before 
+
+                submitting the assessment. 
+
+            </div> 
+
+            <form id="quizForm"> 
+
+                <div class="question-box"> 
+
+                    <h3 class="question-title"> 
+
+                        <span class="number">1</span> 
+
+                        What does WWW represent? 
+
+                    </h3> 
+
+                    <label class="choice"> 
+
+                        <input 
+
+                            type="radio" 
+
+                            name="answer1" 
+
+                            value="World Wide Web" 
+
+                            required 
+
+                        > 
+
+                        World Wide Web 
+
+                    </label> 
+
+                    <label class="choice"> 
+
+                        <input 
+
+                            type="radio" 
+
+                            name="answer1" 
+
+                            value="Web World Wide" 
+
+                        > 
+
+                        Web World Wide 
+
+                    </label> 
+
+                    <label class="choice"> 
+
+                        <input 
+
+                            type="radio" 
+
+                            name="answer1" 
+
+                            value="Wide Web World" 
+
+                        > 
+
+                        Wide Web World 
+
+                    </label> 
+
+                </div> 
+
+                <!-- Question 2 --> 
+
+                <div class="question-box"> 
+
+                    <h3 class="question-title"> 
+
+                        <span class="number">2</span> 
+
+                        Which HTML element represents the biggest heading? 
+
+                    </h3> 
+
+                    <label class="choice"> 
+
+                        <input 
+
+                            type="radio" 
+
+                            name="answer2" 
+
+                            value="h1" 
+
+                            required 
+
+                        > 
+
+                        &lt;h1&gt; 
+
+                    </label> 
+
+                    <label class="choice"> 
+
+                        <input 
+
+                            type="radio" 
+
+                            name="answer2" 
+
+                            value="h6" 
+
+                        > 
+
+                        &lt;h6&gt; 
+
+                    </label> 
+
+                    <label class="choice"> 
+
+                        <input 
+
+                            type="radio" 
+
+                            name="answer2" 
+
+                            value="heading" 
+
+                        > 
+
+                        &lt;heading&gt; 
+
+                    </label> 
+
+                </div> 
+
+                <!-- Question 3 --> 
+
+                <div class="question-box"> 
+
+                    <h3 class="question-title"> 
+
+                        <span class="number">3</span> 
+
+                        Which protocol is commonly used for file transfer? 
+
+                    </h3> 
+
+                    <label class="choice"> 
+
+                        <input 
+
+                            type="radio" 
+
+                            name="answer3" 
+
+                            value="FTP" 
+
+                            required 
+
+                        > 
+
+                        FTP 
+
+                    </label> 
+
+                    <label class="choice"> 
+
+                        <input 
+
+                            type="radio" 
+
+                            name="answer3" 
+
+                            value="SMTP" 
+
+                        > 
+
+                        SMTP 
+
+                    </label> 
+
+                    <label class="choice"> 
+
+                        <input 
+
+                            type="radio" 
+
+                            name="answer3" 
+
+                            value="DNS" 
+
+                        > 
+
+                        DNS 
+
+                    </label> 
+
+                </div> 
+
+                <!-- Question 4 --> 
+
+                <div class="question-box"> 
+
+                    <h3 class="question-title"> 
+
+                        <span class="number">4</span> 
+
+                        Which CSS property is used to set an element's 
+
+                        background color? 
+
+                    </h3> 
+
+                    <label class="choice"> 
+
+                        <input 
+
+                            type="radio" 
+
+                            name="answer4" 
+
+                            value="background-color" 
+
+                            required 
+
+                        > 
+
+                        background-color 
+
+                    </label> 
+
+                    <label class="choice"> 
+
+                        <input 
+
+                            type="radio" 
+
+                            name="answer4" 
+
+                            value="font-color" 
+
+                        > 
+
+                        font-color 
+
+                    </label> 
+
+                    <label class="choice"> 
+
+                        <input 
+
+                            type="radio" 
+
+                            name="answer4" 
+
+                            value="background-text" 
+
+                        > 
+
+                        background-text 
+
+                    </label> 
+
+                </div> 
+
+                <!-- Question 5 --> 
+
+                <div class="question-box"> 
+
+                    <h3 class="question-title"> 
+
+                        <span class="number">5</span> 
+
+                        Which keyword can be used to declare a 
+
+                        JavaScript variable? 
+
+ 
+
+                    </h3> 
+
+                    <label class="choice"> 
+
+                        <input 
+
+                            type="radio" 
+
+                            name="answer5" 
+
+                            value="let" 
+
+                            required 
+
+                        > 
+
+                        let 
+
+                    </label> 
+
+                    <label class="choice"> 
+
+                        <input 
+
+                            type="radio" 
+
+                            name="answer5" 
+
+                            value="variable" 
+
+                        > 
+
+                        variable 
+
+                    </label> 
+
+                    <label class="choice"> 
+
+                        <input 
+
+                            type="radio" 
+
+                            name="answer5" 
+
+                            value="define" 
+
+                        > 
+
+                        define 
+
+                    </label> 
+
+                </div> 
+
+                <!-- Question 6 --> 
+
+                <div class="question-box"> 
+
+                    <h3 class="question-title"> 
+
+                        <span class="number">6</span> 
+
+                        Which attribute contains the path of an image? 
+
+                    </h3> 
+
+                    <label class="choice"> 
+
+                        <input 
+
+                            type="radio" 
+
+                            name="answer6" 
+
+                            value="src" 
+
+                            required 
+
+                        > 
+
+                        src 
+
+                    </label> 
+
+                    <label class="choice"> 
+
+                        <input 
+
+                            type="radio" 
+
+                            name="answer6" 
+
+                            value="href" 
+
+                        > 
+
+                        href 
+
+                    </label> 
+
+                    <label class="choice"> 
+
+                        <input 
+
+                            type="radio" 
+
+                            name="answer6" 
+
+                            value="path" 
+
+                        > 
+
+                        path 
+
+                    </label> 
+
+                </div> 
+
+                <!-- Question 7 --> 
+
+                <div class="question-box"> 
+
+ 
+
+                    <h3 class="question-title"> 
+
+                        <span class="number">7</span> 
+
+                        Which HTML element is used to create a table? 
+
+                    </h3> 
+
+                    <label class="choice"> 
+
+                        <input 
+
+                            type="radio" 
+
+                            name="answer7" 
+
+                            value="table" 
+
+                            required 
+
+                        > 
+
+                        &lt;table&gt; 
+
+                    </label> 
+
+                    <label class="choice"> 
+
+                        <input 
+
+                            type="radio" 
+
+                            name="answer7" 
+
+                            value="tab" 
+
+                        > 
+
+                        &lt;tab&gt; 
+
+                    </label> 
+
+                    <label class="choice"> 
+
+                        <input 
+
+                            type="radio" 
+
+                            name="answer7" 
+
+                            value="grid" 
+
+                        > 
+
+                        &lt;grid&gt; 
+
+                    </label> 
+
+                </div> 
+
+                <!-- Question 8 --> 
+
+                <div class="question-box"> 
+
+                    <h3 class="question-title"> 
+
+                        <span class="number">8</span> 
+
+                        What is the meaning of CSS? 
+
+                    </h3> 
+
+                    <label class="choice"> 
+
+                        <input 
+
+                            type="radio" 
+
+                            name="answer8" 
+
+                            value="Cascading Style Sheets" 
+
+                            required 
+
+                        > 
+
+                        Cascading Style Sheets 
+
+                    </label 
+
+                    <label class="choice"> 
+
+                        <input 
+
+                            type="radio" 
+
+                            name="answer8" 
+
+                            value="Computer Style Sheets" 
+
+                        > 
+
+                        Computer Style Sheets 
+
+                    </label> 
+
+                    <label class="choice"> 
+
+                        <input 
+
+                            type="radio" 
+
+                            name="answer8" 
+
+                            value="Creative Styling System" 
+
+                        > 
+
+                        Creative Styling System 
+
+                    </label> 
+
+                </div> 
+
+                <!-- Question 9 --> 
+
+                <div class="question-box"> 
+
+                    <h3 class="question-title"> 
+
+                        <span class="number">9</span> 
+
+                        Which HTML element inserts a line break? 
+
+                    </h3> 
+
+                    <label class="choice"> 
+
+                        <input 
+
+                            type="radio" 
+
+                            name="answer9" 
+
+                            value="br" 
+
+                            required 
+
+                        > 
+
+                        &lt;br&gt; 
+
+                    </label> 
+
+                    <label class="choice"> 
+
+                        <input 
+
+                            type="radio" 
+
+                            name="answer9" 
+
+                            value="break" 
+
+                        > 
+
+                        &lt;break&gt; 
+
+                    </label 
+
+                    <label class="choice"> 
+
+                        <input 
+
+                            type="radio" 
+
+                            name="answer9" 
+
+                            value="lb" 
+
+                        > 
+
+                        &lt;lb&gt; 
+
+                    </label> 
+
+                </div> 
+
+                <!-- Question 10 --> 
+
+                <div class="question-box" 
+
+                    <h3 class="question-title" 
+
+                        <span class="number">10</span> 
+
+                        Which image attribute specifies alternative text? 
+
+                    </h3 
+
+                    <label class="choice"> 
+
+                        <input 
+
+                            type="radio" 
+
+                            name="answer10" 
+
+                            value="alt" 
+
+                            required 
+
+                        > 
+
+                        alt 
+
+                    </label> 
+
+                    <label class="choice"> 
+
+                        <input 
+
+                            type="radio" 
+
+                            name="answer10" 
+
+                            value="text" 
+
+                        > 
+
+                        text 
+
+                    </label> 
+
+                    <label class="choice"> 
+
+                        <input 
+
+                            type="radio" 
+
+                            name="answer10" 
+
+                            value="description" 
+
+                        > 
+
+                        description 
+
+                    </label 
+
+                </div 
+
+                <!-- Submit --> 
+
+                <div class="submit-section"> 
+
+                    <p> 
+
+                        Make sure you have answered all 10 questions. 
+
+                    </p> 
+
+                    <button 
+
+                        type="submit" 
+
+                        class="submit-btn" 
+
+                    > 
+
+                        Submit Assessment 
+
+                    </button> 
+
+                </div 
+
+            </form> 
+
+        </main> 
+
+    </section> 
+
+ 
+
+    <section id="resultPage" 
+
+        <div class="result-container"> 
+
+            <div lass="result-icon"> 
+
+                ✓ 
+
+            </div 
+
+            <h2>Assessment Completed!</h2> 
+
+            <p id="resultStudent"></p> 
+
+            <div class="score" id="score"> 
+
+                0 / 10 
+
+            </div> 
+
+            <p class="result-message" id="resultMessage"></p> 
+
+            <button 
+
+                class="restart-btn" 
+
+                onclick="restartExam()" 
+
+            > 
+
+                Back to Registration 
+
+            </button> 
+
+        </div> 
+
+    </section> 
+
+ 
+
+    <script> 
+
+ 
+
+        document 
+
+            .getElementById("registrationForm") 
+
+            .addEventListener("submit", function(event) { 
+
+ 
+
+                event.preventDefault(); 
+
+ 
+
+                const name = 
+
+                    document.getElementById("name").value.trim(); 
+
+ 
+
+                const roll = 
+
+                    document.getElementById("roll").value.trim(); 
+
+ 
+
+                const email = 
+
+                    document.getElementById("email").value.trim(); 
+
+ 
+
+                const department = 
+
+                    document.getElementById("department").value; 
+
+ 
+
+                const semester = 
+
+                    document.getElementById("semester").value; 
+
+                let isValid = true; 
+
+                document.getElementById("nameError").textContent = ""; 
+
+                document.getElementById("rollError").textContent = ""; 
+
+                document.getElementById("emailError").textContent = ""; 
+
+                document.getElementById("departmentError").textContent = ""; 
+
+                document.getElementById("semesterError").textContent = ""; 
+
+ 
+
+                if (!/^[A-Za-z ]{3,}$/.test(name)) { 
+
+ 
+
+                    document.getElementById("nameError").textContent = 
+
+                        "Please enter a valid name."; 
+
+ 
+
+                    isValid = false; 
+
+                } 
+
+ 
+
+                if (roll === "") { 
+
+ 
+
+                    document.getElementById("rollError").textContent = 
+
+                        "Please enter your roll number."; 
+
+ 
+
+                    isValid = false; 
+
+                } 
+
+ 
+
+                const emailPattern = 
+
+                    /^[^\s@]+@[^\s@]+\.[^\s@]+$/; 
+
+ 
+
+                if (!emailPattern.test(email)) { 
+
+ 
+
+                    document.getElementById("emailError").textContent = 
+
+                        "Please enter a valid email."; 
+
+ 
+
+                    isValid = false; 
+
+                } 
+
+ 
+
+                if (department === "") { 
+
+ 
+
+                    document.getElementById("departmentError").textContent = 
+
+                        "Select your department."; 
+
+ 
+
+                    isValid = false; 
+
+                } 
+
+ 
+
+                if (semester === "") { 
+
+ 
+
+                    document.getElementById("semesterError").textContent = 
+
+                        "Select your semester."; 
+
+ 
+
+                    isValid = false; 
+
+                } 
+
+ 
+
+                if (isValid) { 
+
+ 
+
+                    document.getElementById("registrationPage").style.display = 
+
+                        "none"; 
+
+ 
+
+                    document.getElementById("quizPage").style.display = 
+
+                        "block"; 
+
+ 
+
+                    document.getElementById("studentInfo").textContent = 
+
+                        "Student: " + name + 
+
+                        " | Roll No: " + roll + 
+
+                        " | Department: " + department + 
+
+                        " | Semester: " + semester; 
+
+                } 
+
+ 
+
+            }); 
+
+        document 
+
+            .getElementById("quizForm") 
+
+            .addEventListener("submit", function(event) { 
+
+ 
+
+                event.preventDefault(); 
+
+ 
+
+                const correctAnswers = { 
+
+ 
+
+                    answer1: "World Wide Web", 
+
+ 
+
+                    answer2: "h1", 
+
+ 
+
+                    answer3: "FTP", 
+
+ 
+
+                    answer4: "background-color", 
+
+ 
+
+                    answer5: "let", 
+
+ 
+
+                    answer6: "src", 
+
+ 
+
+                    answer7: "table", 
+
+ 
+
+                    answer8: "Cascading Style Sheets", 
+
+ 
+
+                    answer9: "br", 
+
+ 
+
+                    answer10: "alt" 
+
+ 
+
+                }; 
+
+                let score = 0; 
+
+                for (let question in correctAnswers)  
+
+                    const selected = 
+
+                        document.querySelector( 
+
+                            'input[name="' + question + '"]:checked' 
+
+                        ); 
+
+                    if ( 
+
+                        selected && 
+
+                        selected.value === correctAnswers[question] 
+
+                    )  
+
+                        score++; 
+
+                    } 
+
+ 
+
+                } 
+
+ 
+
+                const name = 
+
+                    document.getElementById("name").value.trim(); 
+
+ 
+
+                document.getElementById("quizPage").style.display = 
+
+                    "none"; 
+
+                document.getElementById("resultPage").style.display = 
+
+                    "flex"; 
+
+ 
+
+ 
+
+                document.getElementById("resultStudent").textContent = 
+
+                    "Well done, " + name + "!" 
+
+                document.getElementById("score").textContent = 
+
+                    score + " / 10" 
+
+                let message = ""; 
+
+                if (score === 10) { 
+
+                    message = 
+
+                        "Excellent! You answered every question correctly."; 
+
+                } else if (score >= 7) { 
+
+                    message = 
+
+                        "Great job! You have a strong understanding of web technology."; 
+
+                } else if (score >= 5)  
+
+                    message = 
+
+                        "Good effort! Keep practicing HTML, CSS and JavaScript."; 
+
+                } else  
+
+                    message = 
+
+                        "Keep practicing. Review the basics and try again."; 
+
+                } 
+
+                document.getElementById("resultMessage").textContent = 
+
+                    message; 
+
+ 
+
+            }) 
+
+        function restartExam() { 
+
+ 
+
+            document.getElementById("resultPage").style.display = 
+
+                "none"; 
+
+            document.getElementById("quizPage").style.display = 
+
+                "none" 
+
+            document.getElementById("registrationPage").style.display = 
+
+                "flex" 
+
+            document.getElementById("registrationForm").reset(); 
+
+            document.getElementById("quizForm").reset(); 
+
+ 
+
+            document.getElementById("studentInfo").textContent = ""; 
+
+ 
+
+        } 
+
+    </script> 
+
+</body> 
+
+</html> 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
