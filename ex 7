@@ -1,0 +1,205 @@
+Exno 7: 
+
+<!DOCTYPE html> 
+
+<html> <head> <title>Session Tracking</title> </head> 
+
+<body> 
+
+<h2>Session Tracking using Java Servlet</h2> 
+
+<form action="HiddenFieldServlet1" method="get"> 
+
+<label>Name:</label> 
+
+<input type="text" name="uname" required> 
+
+<br><br> 
+
+<label>Password:</label> 
+
+    <input type="password" name="password" required> 
+
+<br><br> 
+
+    <input type="submit" value="Submit"> 
+
+</form> 
+
+HiddenFieldServlet1.java: 
+
+import java.io.IOException; 
+import java.io.PrintWriter; 
+import javax.servlet.ServletException; 
+import javax.servlet.annotation.WebServlet; 
+import javax.servlet.http.HttpServlet; 
+import javax.servlet.http.HttpServletRequest; 
+import javax.servlet.http.HttpServletResponse; 
+
+@WebServlet("/HiddenFieldServlet1") 
+public class HiddenFieldServlet1 extends HttpServlet { 
+
+protected void doGet(HttpServletRequest request, 
+
+                     HttpServletResponse response) 
+
+        throws ServletException, IOException { 
+
+ String name = request.getParameter("uname"); 
+
+ String password = request.getParameter("password"); 
+
+ response.setContentType("text/html"); 
+
+PrintWriter out = response.getWriter(); 
+
+out.println("<html>"); 
+
+out.println("<body>"); 
+
+ out.println("<h2>Welcome, " + name + "</h2>"); 
+
+ out.println("<form action='HiddenFieldServlet2' method='get'>"); 
+
+out.println("<input type='hidden' name='hf' value='" + name + "'>"); 
+
+out.println("<input type='hidden' name='hp' value='" + password + "'>"); 
+
+out.println("<input type='submit' value='Go'>"); 
+
+out.println("</form>"); 
+
+ out.println("</body>"); 
+
+ out.println("</html>"); 
+
+}} 
+
+HiddenFieldServlet2.java 
+
+import java.io.IOException; 
+import java.io.PrintWriter; 
+import javax.servlet.ServletException; 
+import javax.servlet.annotation.WebServlet; 
+import javax.servlet.http.HttpServlet; 
+import javax.servlet.http.HttpServletRequest; 
+import javax.servlet.http.HttpServletResponse; 
+
+@WebServlet("/HiddenFieldServlet2") 
+public class HiddenFieldServlet2 extends HttpServlet { 
+
+protected void doGet(HttpServletRequest request, 
+
+                     HttpServletResponse response) 
+
+        throws ServletException, IOException { 
+
+String name = request.getParameter("hf"); 
+
+ String password = request.getParameter("hp"); 
+
+response.setContentType("text/html"); 
+
+PrintWriter out = response.getWriter(); 
+
+out.println("<html>"); 
+
+    out.println("<body>"); 
+
+out.println("<h2>Hello, " + name + "</h2>"); out.println("<p>Password received successfully.</p>")out.println("<p>This value was passed using Hidden Form Fields.</p>");out.println("</body>"); 
+
+    out.println("</html>"); 
+
+}} 
+
+URLRewriteServlet1.java 
+
+import java.io.IOException; 
+import java.io.PrintWriter; 
+import javax.servlet.ServletException; 
+import javax.servlet.annotation.WebServlet; 
+import javax.servlet.http.HttpServlet; 
+import javax.servlet.http.HttpServletRequest; 
+import javax.servlet.http.HttpServletResponse; 
+
+@WebServlet("/URLRewriteServlet1") 
+public class URLRewriteServlet1 extends HttpServlet { 
+
+protected void doGet(HttpServletRequest request, 
+
+                     HttpServletResponse response) 
+
+        throws ServletException, IOException { 
+
+String name = request.getParameter("uname"); 
+
+    String password = request.getParameter("password"); 
+
+  response.setContentType("text/html"); 
+
+    PrintWriter out = response.getWriter(); 
+
+out.println("<html>"); 
+
+    out.println("<body>"); 
+
+  out.println("<h2>Welcome, " + name + "</h2>"); 
+
+ out.println("<a href='URLRewriteServlet2?uname=" + name 
+
+            + "&password=" + password + "'>"); 
+
+out.println("Visit Next Page"); 
+
+ out.println("</a>"); 
+
+out.println("</body>"); 
+
+    out.println("</html>"); 
+
+}} 
+
+URLRewriteServlet2.java 
+
+import java.io.IOException; 
+import java.io.PrintWriter; 
+import javax.servlet.ServletException; 
+import javax.servlet.annotation.WebServlet; 
+import javax.servlet.http.HttpServlet; 
+import javax.servlet.http.HttpServletRequest; 
+import javax.servlet.http.HttpServletResponse; 
+
+@WebServlet("/URLRewriteServlet2") 
+public class URLRewriteServlet2 extends HttpServlet { 
+
+protected void doGet(HttpServletRequest request, 
+
+HttpServletResponse response) 
+
+        throws ServletException, IOException {String name = request.getParameter("uname"); 
+
+    String password = request.getParameter("password"); 
+
+ response.setContentType("text/html"); 
+
+ PrintWriter out = response.getWriter(); 
+
+out.println("<html>"); 
+
+    out.println("<body>"); 
+
+out.println("<h2>Hello, " + name + "</h2>"); 
+
+out.println("<p>Password received successfully.</p>"); 
+
+out.println("<p>This value was passed using URL Rewriting.</p>"); 
+
+out.println("</body>");   out.println("</html>");  }} 
+
+ 
+
+ 
+
+ 
+
+ 
