@@ -1,0 +1,1319 @@
+```html
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Online Shopping System</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial, sans-serif;
+
+    background-color:linen;
+
+    background-image:url("https://media.istockphoto.com/id/1247567791/vector/shopping-online-with-realistic-modern-smartphone-virtual-realistic-geometry-gifts-shopping.jpg?s=612x612&w=0&k=20&c=vjZm-IU7z3K_qN4luKcFMje4YXlSsiy10ILusXYCoz4=");
+
+    background-repeat:no-repeat;
+    background-size:cover;
+    background-position:center;
+    background-attachment:fixed;
+}
+
+
+/* Common container */
+
+.page{
+    min-height:100vh;
+    background:transparent;
+    padding-bottom:30px;
+}
+
+
+/* Header */
+
+header{
+    text-align:center;
+    padding:15px;
+    background:rgba(0,0,0,0.75);
+}
+
+header h1{
+    color:white;
+    margin:5px;
+}
+
+nav{
+    margin-top:15px;
+}
+
+nav button{
+    background:white;
+    color:red;
+    border:none;
+    padding:10px 18px;
+    margin:4px;
+    cursor:pointer;
+    font-weight:bold;
+    border-radius:5px;
+}
+
+nav button:hover{
+    background:red;
+    color:white;
+}
+
+
+/* Sections */
+
+.section{
+    display:none;
+    width:90%;
+    margin:25px auto;
+    text-align:center;
+}
+
+.active{
+    display:block;
+}
+
+
+/* Headings */
+
+h2{
+    color:red;
+    font-family:Arial, sans-serif;
+    font-style:italic;
+}
+
+hr{
+    width:80%;
+}
+
+
+/* Home */
+
+.welcome{
+    width:80%;
+    border:3px solid blue;
+    padding:20px;
+    margin:20px auto;
+    background-color:white;
+}
+
+.welcome p{
+    font-style:italic;
+}
+
+
+/* Tables */
+
+table{
+    margin:20px auto;
+    border-collapse:collapse;
+    background-color:white;
+}
+
+th{
+    background-color:#333;
+    color:white;
+}
+
+th,td{
+    border:1px solid black;
+    padding:12px;
+}
+
+.product-img{
+    width:120px;
+    height:120px;
+    object-fit:cover;
+    border-radius:5px;
+}
+
+
+/* Forms */
+
+.form-table{
+    width:450px;
+    background-color:linen;
+    border:5px solid black;
+    padding:20px;
+}
+
+.form-table td{
+    border:none;
+}
+
+input,select,textarea{
+    padding:7px;
+    border:1px solid #777;
+    border-radius:4px;
+}
+
+input[type="submit"],
+input[type="reset"],
+.checkout{
+    padding:10px 18px;
+    border:none;
+    cursor:pointer;
+    font-weight:bold;
+    border-radius:5px;
+    margin:5px;
+}
+
+input[type="submit"]{
+    background-color:green;
+    color:white;
+}
+
+input[type="reset"]{
+    background-color:red;
+    color:white;
+}
+
+.checkout{
+    background-color:darkgreen;
+    color:white;
+}
+
+
+/* Product category boxes */
+
+.category-box{
+    width:80%;
+    border:3px solid green;
+    padding:20px;
+    margin:20px auto;
+    background-color:#f8f8f8;
+}
+
+.offer-box{
+    width:80%;
+    border:3px dashed red;
+    padding:20px;
+    margin:20px auto;
+    background-color:#fff8dc;
+}
+
+.offer-box ul{
+    text-align:left;
+    display:inline-block;
+}
+
+
+/* Links */
+
+a{
+    color:red;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+a:hover{
+    color:hotpink;
+}
+
+
+/* Footer */
+
+footer{
+    text-align:center;
+    margin-top:30px;
+    padding:15px;
+    background:#222;
+    color:white;
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+<div class="page">
+
+
+<!-- ================= HEADER ================= -->
+
+<header>
+
+<h1>ONLINE SHOPPING SYSTEM</h1>
+
+<hr>
+
+<nav>
+
+<button onclick="showPage('home')">
+Home
+</button>
+
+<button onclick="showPage('mobiles')">
+Mobiles
+</button>
+
+<button onclick="showPage('fashion')">
+Fashion
+</button>
+
+<button onclick="showPage('cart')">
+Cart
+</button>
+
+<button onclick="showPage('login')">
+Login
+</button>
+
+<button onclick="showPage('register')">
+Register
+</button>
+
+</nav>
+
+</header>
+
+
+<!-- ================= REGISTER ================= -->
+
+<div id="register" class="section">
+
+<h2>Create New Account</h2>
+
+<form onsubmit="registerUser(event)">
+
+<table class="form-table">
+
+<tr>
+
+<td>Full Name</td>
+
+<td>
+<input type="text" required>
+</td>
+
+</tr>
+
+
+<tr>
+
+<td>Email ID</td>
+
+<td>
+<input type="email" required>
+</td>
+
+</tr>
+
+
+<tr>
+
+<td>Mobile Number</td>
+
+<td>
+<input type="tel" required>
+</td>
+
+</tr>
+
+
+<tr>
+
+<td>Gender</td>
+
+<td>
+
+<input type="radio"
+name="gender"
+required>
+
+Male
+
+<input type="radio"
+name="gender">
+
+Female
+
+</td>
+
+</tr>
+
+
+<tr>
+
+<td>Date of Birth</td>
+
+<td>
+<input type="date">
+</td>
+
+</tr>
+
+
+<tr>
+
+<td>Address</td>
+
+<td>
+
+<textarea
+rows="4"
+cols="25">
+</textarea>
+
+</td>
+
+</tr>
+
+
+<tr>
+
+<td>State</td>
+
+<td>
+
+<select required>
+
+<option value="">
+Select State
+</option>
+
+<option>
+Tamil Nadu
+</option>
+
+<option>
+Kerala
+</option>
+
+<option>
+Karnataka
+</option>
+
+<option>
+Andhra Pradesh
+</option>
+
+</select>
+
+</td>
+
+</tr>
+
+
+<tr>
+
+<td>Pincode</td>
+
+<td>
+<input type="text">
+</td>
+
+</tr>
+
+
+<tr>
+
+<td>Username</td>
+
+<td>
+<input type="text" required>
+</td>
+
+</tr>
+
+
+<tr>
+
+<td>Password</td>
+
+<td>
+
+<input
+type="password"
+id="password"
+required>
+
+</td>
+
+</tr>
+
+
+<tr>
+
+<td>Confirm Password</td>
+
+<td>
+
+<input
+type="password"
+id="confirmPassword"
+required>
+
+</td>
+
+</tr>
+
+
+<tr>
+
+<td colspan="2"
+style="text-align:center">
+
+<input
+type="submit"
+value="Register">
+
+<input
+type="reset"
+value="Clear">
+
+</td>
+
+</tr>
+
+</table>
+
+</form>
+
+
+<p>
+Already have an account?
+</p>
+
+<a href="#"
+onclick="showPage('login')">
+
+Login Here
+
+</a>
+
+</div>
+
+
+<!-- ================= LOGIN ================= -->
+
+<div id="login" class="section">
+
+<h2>User Login</h2>
+
+<form onsubmit="loginUser(event)">
+
+<table class="form-table">
+
+<tr>
+
+<td>Username</td>
+
+<td>
+
+<input
+type="text"
+required>
+
+</td>
+
+</tr>
+
+
+<tr>
+
+<td>Password</td>
+
+<td>
+
+<input
+type="password"
+required>
+
+</td>
+
+</tr>
+
+
+<tr>
+
+<td>User Type</td>
+
+<td>
+
+<input
+type="radio"
+name="user"
+required>
+
+Customer
+
+<input
+type="radio"
+name="user">
+
+Admin
+
+</td>
+
+</tr>
+
+
+<tr>
+
+<td colspan="2"
+style="text-align:center">
+
+<input
+type="submit"
+value="Login">
+
+<input
+type="reset"
+value="Clear">
+
+</td>
+
+</tr>
+
+</table>
+
+</form>
+
+
+<p>
+Don't have an account?
+</p>
+
+<a href="#"
+onclick="showPage('register')">
+
+Register Here
+
+</a>
+
+</div>
+
+
+<!-- ================= HOME ================= -->
+
+<div id="home"
+class="section active">
+
+<h2>
+Welcome to Online Shopping System
+</h2>
+
+
+<div class="welcome">
+
+<h2>
+Welcome to Online Shopping System
+</h2>
+
+<p>
+Buy the latest mobiles, fashion products
+and accessories at the best prices.
+</p>
+
+<p>
+Enjoy secure shopping, exciting offers
+and fast delivery.
+</p>
+
+</div>
+
+
+<hr>
+
+
+<h2>
+Product Categories
+</h2>
+
+
+<div class="category-box">
+
+<table>
+
+<tr>
+
+<th>
+Category
+</th>
+
+<th>
+Description
+</th>
+
+<th>
+Visit
+</th>
+
+</tr>
+
+
+<tr>
+
+<td>
+Mobiles
+</td>
+
+<td>
+Smartphones, Earbuds, Chargers
+and Accessories
+</td>
+
+<td>
+
+<button
+onclick="showPage('mobiles')">
+
+View Products
+
+</button>
+
+</td>
+
+</tr>
+
+
+<tr>
+
+<td>
+Fashion
+</td>
+
+<td>
+Shirts, Dresses, Shoes
+and Accessories
+</td>
+
+<td>
+
+<button
+onclick="showPage('fashion')">
+
+View Products
+
+</button>
+
+</td>
+
+</tr>
+
+</table>
+
+</div>
+
+
+<div class="offer-box">
+
+<h2>
+Special Offers
+</h2>
+
+<ul>
+
+<li>
+Up to 50% Discount on Selected Products
+</li>
+
+<li>
+Free Delivery on Orders Above ₹999
+</li>
+
+<li>
+Easy Return Policy
+</li>
+
+<li>
+Cash on Delivery Available
+</li>
+
+<li>
+Secure Online Payment
+</li>
+
+</ul>
+
+</div>
+
+</div>
+
+
+<!-- ================= MOBILES ================= -->
+
+<div id="mobiles"
+class="section">
+
+<h2>
+Mobile Products
+</h2>
+
+
+<table>
+
+<tr>
+
+<th>
+Product
+</th>
+
+<th>
+Image
+</th>
+
+<th>
+Price
+</th>
+
+<th>
+Description
+</th>
+
+<th>
+Action
+</th>
+
+</tr>
+
+
+<!-- iPhone -->
+
+<tr>
+
+<td>
+iPhone 16
+</td>
+
+<td>
+
+<img
+src="https://media.istockphoto.com/id/1698903380/photo/apple-iphone-15-pro-smart-phone.jpg?s=2048x2048&w=is&k=20&c=3A06WbVbOxRTISjHbvZ6UxY8V5T1B6i1Oj1Y21-GzE4="
+class="product-img"
+alt="iPhone 16">
+
+</td>
+
+<td>
+₹79,999
+</td>
+
+<td>
+Apple 128GB Smartphone
+</td>
+
+<td>
+
+<button
+onclick="addToCart('iPhone 16',79999)">
+
+Add to Cart
+
+</button>
+
+</td>
+
+</tr>
+
+
+<!-- Samsung -->
+
+<tr>
+
+<td>
+Samsung Galaxy S25
+</td>
+
+<td>
+
+<img
+src="https://media.istockphoto.com/id/1960219022/photo/granada-andalusia-spain-25th-january-2024-new-samsung-s24-ultra-freshly-turned-on-screen-with.jpg?s=2048x2048&w=is&k=20&c=TMwFTyxdHZlYuP3028Vq1L65vRqvtTfmiUgZQ10kE6g="
+class="product-img"
+alt="Samsung Galaxy S25">
+
+</td>
+
+<td>
+₹74,999
+</td>
+
+<td>
+Samsung 256GB Smartphone
+</td>
+
+<td>
+
+<button
+onclick="addToCart('Samsung Galaxy S25',74999)">
+
+Add to Cart
+
+</button>
+
+</td>
+
+</tr>
+
+
+<!-- OnePlus -->
+
+<tr>
+
+<td>
+OnePlus 13
+</td>
+
+<td>
+
+<img
+src="https://media.istockphoto.com/id/1391880312/photo/oneplus-10-pro-in-volcanic-black-color.jpg?s=2048x2048&w=is&k=20&c=46UbMvfqd9L9W-GbQ0fqy4QAxUWwoAJKrWav0W5353Y="
+class="product-img"
+alt="OnePlus 13">
+
+</td>
+
+<td>
+₹59,999
+</td>
+
+<td>
+OnePlus 256GB 5G Smartphone
+</td>
+
+<td>
+
+<button
+onclick="addToCart('OnePlus 13',59999)">
+
+Add to Cart
+
+</button>
+
+</td>
+
+</tr>
+
+</table>
+
+</div>
+
+
+<!-- ================= FASHION ================= -->
+
+<div id="fashion"
+class="section">
+
+<h2>
+Fashion Products
+</h2>
+
+
+<table>
+
+<tr>
+
+<th>
+Product
+</th>
+
+<th>
+Image
+</th>
+
+<th>
+Price
+</th>
+
+<th>
+Description
+</th>
+
+<th>
+Action
+</th>
+
+</tr>
+
+
+<!-- T-Shirt -->
+
+<tr>
+
+<td>
+Men's T-Shirt
+</td>
+
+<td>
+
+<img
+src="https://media.istockphoto.com/id/1281297067/photo/blank-black-and-white-polo-shirt-mock-up-front-view.jpg?s=2048x2048&w=is&k=20&c=Bdei6Fa3IgQNUXanQt7E64_xOBCCRQL3RhZFDXnlDHo="
+class="product-img"
+alt="T Shirt">
+
+</td>
+
+<td>
+₹799
+</td>
+
+<td>
+Cotton Round Neck T-Shirt
+</td>
+
+<td>
+
+<button
+onclick="addToCart('Men T-Shirt',799)">
+
+Add to Cart
+
+</button>
+
+</td>
+
+</tr>
+
+
+<!-- Dress -->
+
+<tr>
+
+<td>
+Women's Dress
+</td>
+
+<td>
+
+<img
+src="https://media.istockphoto.com/id/150685327/photo/vintage-fashion.jpg?s=2048x2048&w=is&k=20&c=dMqQmeAwsjzSj2cmYC878KQRnsgSwJTvlMiZTH5owZ0="
+class="product-img"
+alt="Dress">
+
+</td>
+
+<td>
+₹1,499
+</td>
+
+<td>
+Stylish Casual Wear Dress
+</td>
+
+<td>
+
+<button
+onclick="addToCart('Women Dress',1499)">
+
+Add to Cart
+
+</button>
+
+</td>
+
+</tr>
+
+
+<!-- Shoes -->
+
+<tr>
+
+<td>
+Sports Shoes
+</td>
+
+<td>
+
+<img
+src="https://media.istockphoto.com/id/1279108197/photo/variety-of-womens-fashion-comfortable-shoes-of-all-seasons-on-a-light-background-top-view.jpg?s=612x612&w=0&k=20&c=_mdUMo2tsufgilqv8IQeW6hp8YjICTR8_tF-YP1Zgxk="
+class="product-img"
+alt="Sports Shoes">
+
+</td>
+
+<td>
+₹2,499
+</td>
+
+<td>
+Comfortable Running Shoes
+</td>
+
+<td>
+
+<button
+onclick="addToCart('Sports Shoes',2499)">
+
+Add to Cart
+
+</button>
+
+</td>
+
+</tr>
+
+</table>
+
+</div>
+
+
+<!-- ================= CART ================= -->
+
+<div id="cart"
+class="section">
+
+<h2>
+Shopping Cart
+</h2>
+
+
+<table id="cartTable">
+
+<tr>
+
+<th>
+Product
+</th>
+
+<th>
+Price
+</th>
+
+<th>
+Quantity
+</th>
+
+</tr>
+
+</table>
+
+
+<h3 id="total">
+Total Amount: ₹0
+</h3>
+
+
+<button
+class="checkout"
+onclick="checkout()">
+
+Proceed to Checkout
+
+</button>
+
+
+<br><br>
+
+
+<button
+onclick="showPage('mobiles')">
+
+Continue Shopping
+
+</button>
+
+</div>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+<b>
+© 2026 Online Shopping System.
+All Rights Reserved.
+</b>
+
+</footer>
+
+
+</div>
+
+
+<!-- ================= JAVASCRIPT ================= -->
+
+<script>
+
+let cart = [];
+
+
+/* Show Pages */
+
+function showPage(pageId){
+
+    let sections =
+    document.querySelectorAll(".section");
+
+    sections.forEach(function(section){
+
+        section.classList.remove("active");
+
+    });
+
+    document
+    .getElementById(pageId)
+    .classList.add("active");
+
+    window.scrollTo(0,0);
+}
+
+
+/* Registration */
+
+function registerUser(event){
+
+    event.preventDefault();
+
+    let password =
+    document
+    .getElementById("password")
+    .value;
+
+    let confirmPassword =
+    document
+    .getElementById("confirmPassword")
+    .value;
+
+    if(password !== confirmPassword){
+
+        alert(
+        "Password and Confirm Password do not match!"
+        );
+
+        return;
+    }
+
+    alert(
+    "Registration Successful!"
+    );
+
+    showPage("login");
+}
+
+
+/* Login */
+
+function loginUser(event){
+
+    event.preventDefault();
+
+    alert(
+    "Login Successful!"
+    );
+
+    showPage("home");
+}
+
+
+/* Add Product to Cart */
+
+function addToCart(name,price){
+
+    cart.push({
+
+        name:name,
+        price:price
+
+    });
+
+    alert(
+    name + " added to cart!"
+    );
+
+    displayCart();
+}
+
+
+/* Display Cart */
+
+function displayCart(){
+
+    let table =
+    document.getElementById("cartTable");
+
+    table.innerHTML =
+    `
+    <tr>
+
+    <th>
+    Product
+    </th>
+
+    <th>
+    Price
+    </th>
+
+    <th>
+    Quantity
+    </th>
+
+    </tr>
+    `;
+
+    let total = 0;
+
+
+    cart.forEach(function(product){
+
+        let row =
+        table.insertRow();
+
+        row.insertCell(0)
+        .innerHTML =
+        product.name;
+
+        row.insertCell(1)
+        .innerHTML =
+        "₹" +
+        product.price.toLocaleString();
+
+        row.insertCell(2)
+        .innerHTML =
+        "1";
+
+        total += product.price;
+
+    });
+
+
+    document
+    .getElementById("total")
+    .innerHTML =
+    "Total Amount: ₹" +
+    total.toLocaleString();
+
+}
+
+
+/* Checkout */
+
+function checkout(){
+
+    if(cart.length === 0){
+
+        alert(
+        "Your cart is empty!"
+        );
+
+        return;
+    }
+
+
+    alert(
+    "Thank you for shopping!\n" +
+    "Your order has been placed successfully."
+    );
+
+}
+
+
+/* Initial Cart */
+
+displayCart();
+
+</script>
+
+</body>
+</html>
