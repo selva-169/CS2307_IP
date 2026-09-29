@@ -1,0 +1,356 @@
+
+Ex 10
+Index.php
+<!DOCTYPE html>
+<html>
+<head>
+<title>User Registration</title>
+<style>
+body {
+font-family: Arial, sans-serif;
+background-color: thistle;
+margin: 0;
+padding: 0;
+}
+.container {
+width: 450px;
+margin: 30px auto;
+padding: 25px;
+background-color: white;
+border-radius: 12px;
+box-shadow: 0 4px 15px gray;
+}
+h1 {
+text-align: center;
+color: #663399;
+}
+.subtitle {
+text-align: center;
+color: gray;
+margin-bottom: 20px;
+}
+label {
+display: block;
+margin-top: 12px;
+font-weight: bold;
+}
+input, select, textarea {
+width: 100%;
+padding: 9px;
+margin-top: 5px;
+box-sizing: border-box;
+border: 1px solid #aaa;
+border-radius: 5px;
+}
+textarea {
+height: 70px;
+resize: none;
+}
+.gender {
+margin-top: 8px;
+}
+.gender input {
+width: auto;
+}
+.buttons {
+text-align: center;
+margin-top: 20px;
+}
+input[type="submit"],
+input[type="reset"] {
+width: 45%;
+padding: 10px;
+border: none;
+color: white;
+font-weight: bold;
+cursor: pointer;
+}
+input[type="submit"] {
+background-color: #663399;
+}
+input[type="reset"] {
+background-color: #888;
+}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>User Registration</h1>
+<div class="subtitle">
+Create your account
+</div>
+<form action="validate.php" method="post">
+<!-- Username -->
+<label>Full Name:</label>
+<input type="text"
+name="username"
+placeholder="Enter your name"
+required>
+<!-- Password -->
+<label>Password:</label>
+<input type="password"
+name="password"
+placeholder="Enter password"
+required>
+<!-- Confirm Password -->
+<label>Confirm Password:</label>
+<input type="password"
+name="confirm"
+placeholder="Confirm password"
+required>
+<!-- Credit Card - Added for Exercise 10 -->
+<label>Credit Card Number:</label>
+<input type="text"
+name="card"
+maxlength="16"
+placeholder="Enter 16 digit card number"
+required>
+<!-- Email -->
+<label>Email:</label>
+<input type="email"
+name="email"
+placeholder="Enter email"
+required>
+<!-- Phone -->
+<label>Phone Number:</label>
+<input type="tel"
+name="phone"
+maxlength="10"
+placeholder="Enter 10 digit phone number"
+required>
+<!-- Date of Birth -->
+<label>Date of Birth:</label>
+<input type="date"
+name="dob"
+required>
+<!-- Gender -->
+<label>Gender:</label>
+<div class="gender">
+<input type="radio"
+name="gender"
+value="Male"
+required> Male
+<input type="radio"
+name="gender"
+value="Female"> Female
+<input type="radio"
+name="gender"
+value="Other"> Other
+</div>
+<!-- Country -->
+<label>Country:</label>
+<select name="country" required>
+<option value="">
+-- Select Country --
+</option>
+<option value="India">
+India
+</option>
+<option value="USA">
+USA
+</option>
+<option value="UK">
+UK
+</option>
+<option value="Canada">
+Canada
+</option>
+</select>
+<!-- Address -->
+<label>Address:</label>
+<textarea name="address"
+placeholder="Enter your address"
+required></textarea>
+<div class="buttons">
+<input type="submit"
+value="Register">
+<input type="reset"
+value="Clear">
+</div>
+</form>
+</div>
+</body>
+</html>
+Validate.php
+<?php
+// Get all form values
+$username = $_POST["username"];
+$password = $_POST["password"];
+$confirm = $_POST["confirm"];
+$card = $_POST["card"];
+$email = $_POST["email"];
+$phone = $_POST["phone"];
+$dob = $_POST["dob"];
+$gender = $_POST["gender"];
+$country = $_POST["country"];
+$address = $_POST["address"];
+$errors = array();
+// ------------------------------------
+// 1. USERNAME VALIDATION
+// ------------------------------------
+if (!preg_match("/^[A-Za-z ]+$/", $username)) {
+$errors[] = "Invalid username.";
+}
+// ------------------------------------
+// 2. PASSWORD VALIDATION
+// ------------------------------------
+if (!preg_match(
+"/^(?=.[A-Z])(?=.[a-z])(?=.[0-9])(?=.[@$!%?&]).{8,}$/",
+$password
+)) {
+$errors[] =
+"Password must contain uppercase, lowercase, number, special character and minimum 8 characters.";
+}
+// ------------------------------------
+// 3. CONFIRM PASSWORD
+// ------------------------------------
+if ($password != $confirm) {
+$errors[] = "Passwords do not match.";
+}
+// ------------------------------------
+// 4. CREDIT CARD VALIDATION
+// Added for Exercise 10
+// Exactly 16 digits
+// ------------------------------------
+if (!preg_match("/^[0-9]{16}$/", $card)) {
+$errors[] =
+"Credit Card Number must contain exactly 16 digits.";
+}
+// ------------------------------------
+// 5. EMAIL VALIDATION
+// ------------------------------------
+if (!preg_match(
+"/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,}$/",
+$email
+)) {
+$errors[] = "Invalid email format.";
+}
+// ------------------------------------
+// 6. PHONE VALIDATION
+// ------------------------------------
+if (!preg_match("/^[6-9][0-9]{9}$/", $phone)) {
+$errors[] =
+"Phone number must contain exactly 10 digits.";
+}
+?>
+<!DOCTYPE html>
+<html>
+<head>
+<title>Registration Result</title>
+<style>
+body {
+font-family: Arial, sans-serif;
+background-color: thistle;
+margin: 0;
+padding: 0;
+}
+.container {
+width: 500px;
+margin: 40px auto;
+padding: 25px;
+background-color: white;
+border-radius: 12px;
+box-shadow: 0 4px 15px gray;
+}
+h1 {
+text-align: center;
+color: #663399;
+}
+.success {
+text-align: center;
+color: green;
+font-weight: bold;
+}
+.details {
+margin-top: 20px;
+}
+.details p {
+padding: 10px;
+margin: 5px 0;
+background-color: #f3e8f5;
+border-radius: 5px;
+}
+.details b {
+color: #663399;
+}
+.error {
+color: red;
+background-color: #ffe6e6;
+padding: 15px;
+border-radius: 5px;
+}
+</style>
+</head>
+<body>
+<div class="container">
+<?php
+// ------------------------------------
+// SUCCESS
+// ------------------------------------
+if (empty($errors)) {
+?>
+<h1>Registration Successful</h1>
+<p class="success">
+Your registration details are displayed below.
+</p>
+<div class="details">
+<p>
+<b>Full Name:</b>
+<?php echo htmlspecialchars($username); ?>
+</p>
+<p>
+<b>Password:</b>
+<?php echo htmlspecialchars($password); ?>
+</p>
+<p>
+<b>Credit Card Number:</b>
+<?php echo htmlspecialchars($card); ?>
+</p>
+<p>
+<b>Email:</b>
+<?php echo htmlspecialchars($email); ?>
+</p>
+<p>
+<b>Phone Number:</b>
+<?php echo htmlspecialchars($phone); ?>
+</p>
+<p>
+<b>Date of Birth:</b>
+<?php echo htmlspecialchars($dob); ?>
+</p>
+<p>
+<b>Gender:</b>
+<?php echo htmlspecialchars($gender); ?>
+</p>
+<p>
+<b>Country:</b>
+<?php echo htmlspecialchars($country); ?>
+</p>
+<p>
+<b>Address:</b>
+<?php echo htmlspecialchars($address); ?>
+</p>
+</div>
+<?php
+}
+// ------------------------------------
+// VALIDATION FAILED
+// ------------------------------------
+else {
+?>
+<h1>Validation Failed</h1>
+<div class="error">
+<?php
+foreach ($errors as $error) {
+echo "<p>" .
+htmlspecialchars($error) .
+"</p>";
+}
+?>
+</div>
+<?php
+}
+?>
+</div>
+</body>
+</html>
