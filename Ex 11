@@ -1,0 +1,437 @@
+
+Index.html
+<!DOCTYPE html>
+<html>
+<head>
+<title>Shopping Order System</title>
+<style>
+o     {
+box-sizing: border-box;
+}
+body {
+margin: 0;
+min-height: 100vh;
+font-family: "Segoe UI", Tahoma, sans-serif;
+background: linear-gradient(135deg, #dbeafe, #eff6ff);
+display: flex;
+justify-content: center;
+align-items: center;
+}
+.container {
+width: 480px;
+padding: 35px 40px;
+background: #ffffff;
+border-radius: 18px;
+box-shadow: 0 15px 35px rgba(37, 99, 235, 0.18);
+}
+h1 {
+text-align: center;
+color: #1e3a8a;
+margin: 0 0 30px;
+font-size: 28px;
+}
+label {
+display: block;
+margin: 18px 0 7px;
+color: #374151;
+font-size: 15px;
+font-weight: 600;
+}
+input {
+width: 100%;
+padding: 13px 14px;
+border: 2px solid #d1d5db;
+border-radius: 8px;
+background: #f9fafb;
+color: #111827;
+font-size: 15px;
+transition: 0.3s;
+}
+input:focus {
+border-color: #2563eb;
+background: #ffffff;
+outline: none;
+box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+.submit-btn {
+width: 100%;
+margin-top: 28px;
+padding: 14px;
+border: none;
+border-radius: 8px;
+background: linear-gradient(90deg, #2563eb, #1d4ed8);
+color: white;
+font-size: 16px;
+font-weight: 600;
+cursor: pointer;
+transition: 0.3s;
+}
+.submit-btn:hover {
+background: linear-gradient(90deg, #1d4ed8, #1e40af);
+transform: translateY(-2px);
+box-shadow: 0 6px 15px rgba(37, 99, 235, 0.25);
+}
+.view-link {
+display: block;
+margin-top: 22px;
+text-align: center;
+color: #2563eb;
+font-weight: 600;
+text-decoration: none;
+transition: 0.3s;
+}
+.view-link:hover {
+color: #1e3a8a;
+text-decoration: underline;
+}
+@media (max-width: 550px) {
+.container {
+width: 90%;
+padding: 30px 25px;
+}
+h1 {
+font-size: 24px;
+}
+}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>Shopping Order Form</h1>
+<form action="insert_order.php" method="POST">
+<label>Customer Name</label>
+<input type="text" name="customer_name" required>
+<label>Product Name</label>
+<input type="text" name="product_name" required>
+<label>Quantity</label>
+<input type="number" name="quantity" min="1" required>
+<label>Price</label>
+<input type="number" name="price" step="0.01" min="0" required>
+<button type="submit" class="submit-btn">
+Place Order
+</button>
+</form>
+<a href="view_orders.php" class="view-link">
+View All Orders
+</a>
+</div>
+</body>
+</html>
+Insert_order.php
+<?php
+include "db_connect.php";
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+$customer_name = $_POST["customer_name"];
+$product_name = $_POST["product_name"];
+$quantity = $_POST["quantity"];
+$price = $_POST["price"];
+$sql = "INSERT INTO orders
+(customer_name, product_name, quantity, price)
+VALUES (?, ?, ?, ?)";
+$stmt = $conn->prepare($sql);
+if ($stmt) {
+$stmt->bind_param(
+"ssid",
+$customer_name,
+$product_name,
+$quantity,
+$price
+);
+if ($stmt->execute()) {
+echo "<!DOCTYPE html>";
+echo "<html>";
+echo "<head>";
+echo "<title>Order Successful</title>";
+echo "<style>
+o     {
+box-sizing: border-box;
+}
+body {
+margin: 0;
+min-height: 100vh;
+font-family: 'Segoe UI', Arial, sans-serif;
+background: linear-gradient(135deg, #667eea, #764ba2);
+display: flex;
+justify-content: center;
+align-items: center;
+}
+.box {
+width: 450px;
+max-width: 90%;
+background: #ffffff;
+padding: 40px;
+text-align: center;
+border-radius: 20px;
+box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+}
+.success-icon {
+width: 70px;
+height: 70px;
+margin: 0 auto 20px;
+border-radius: 50%;
+background: #22c55e;
+color: white;
+font-size: 40px;
+line-height: 70px;
+font-weight: bold;
+}
+h2 {
+margin-bottom: 12px;
+color: #1f2937;
+font-size: 26px;
+}
+p {
+color: #6b7280;
+font-size: 16px;
+margin-bottom: 25px;
+}
+.buttons {
+display: flex;
+justify-content: center;
+gap: 12px;
+flex-wrap: wrap;
+}
+a {
+display: inline-block;
+padding: 12px 20px;
+border-radius: 8px;
+text-decoration: none;
+font-weight: 600;
+transition: 0.3s;
+}
+.new-order {
+background: #667eea;
+color: white;
+}
+.new-order:hover {
+background: #4f46e5;
+transform: translateY(-2px);
+}
+.view-order {
+background: #f3f4f6;
+color: #374151;
+border: 1px solid #d1d5db;
+}
+.view-order:hover {
+background: #e5e7eb;
+transform: translateY(-2px);
+}
+</style>";
+echo "</head>";
+echo "<body>";
+echo "<div class='box'>";
+echo "<div class='success-icon'>✓</div>";
+echo "<h2>Order Placed Successfully!</h2>";
+echo "<p>Your shopping order has been successfully saved in the database.</p>";
+echo "<div class='buttons'>";
+echo "<a class='new-order' href='index.html'>
+Place Another Order
+</a>";
+echo "<a class='view-order' href='view_orders.php'>
+View Orders
+</a>";
+echo "</div>";
+echo "</div>";
+echo "</body>";
+echo "</html>";
+} else {
+echo "Error inserting order: " . $stmt->error;
+}
+$stmt->close();
+} else {
+echo "Error preparing statement: " . $conn->error;
+}
+}
+$conn->close();
+?>
+```
+
+View_orders
+
+<?php
+include "db_connect.php";
+$sql = "SELECT * FROM orders ORDER BY order_date DESC";
+$result = $conn->query($sql);
+?>
+<!DOCTYPE html>
+<html>
+<head>
+<title>View Orders</title>
+<style>
+o     {
+box-sizing: border-box;
+}
+body {
+margin: 0;
+padding: 40px 20px;
+font-family: "Segoe UI", Arial, sans-serif;
+background: #eef2ff;
+color: #1f2937;
+}
+.container {
+width: 95%;
+max-width: 1200px;
+margin: auto;
+background: #ffffff;
+padding: 30px;
+border-radius: 18px;
+box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+}
+h1 {
+text-align: center;
+margin: 0 0 30px;
+color: #4338ca;
+font-size: 30px;
+}
+.table-wrapper {
+width: 100%;
+overflow-x: auto;
+border-radius: 12px;
+border: 1px solid #e5e7eb;
+}
+table {
+width: 100%;
+border-collapse: collapse;
+min-width: 750px;
+}
+th {
+padding: 15px;
+background: linear-gradient(
+90deg,
+#4f46e5,
+#7c3aed
+);
+color: white;
+font-size: 15px;
+text-transform: uppercase;
+letter-spacing: 0.5px;
+}
+td {
+padding: 14px;
+text-align: center;
+border-bottom: 1px solid #e5e7eb;
+color: #374151;
+}
+tbody tr:nth-child(even) {
+background: #f8fafc;
+}
+tbody tr:hover {
+background: #eef2ff;
+transition: 0.2s;
+}
+.price {
+color: #15803d;
+font-weight: bold;
+}
+.quantity {
+font-weight: 600;
+color: #4338ca;
+}
+.back {
+display: inline-block;
+margin-top: 25px;
+padding: 12px 20px;
+background: #4f46e5;
+color: white;
+text-decoration: none;
+border-radius: 8px;
+font-weight: 600;
+transition: 0.3s;
+}
+.back:hover {
+background: #3730a3;
+transform: translateY(-2px);
+box-shadow: 0 5px 12px rgba(79, 70, 229, 0.25);
+}
+.empty {
+padding: 25px;
+color: #6b7280;
+font-style: italic;
+}
+@media (max-width: 600px) {
+body {
+padding: 20px 10px;
+}
+.container {
+width: 100%;
+padding: 20px 15px;
+}
+h1 {
+font-size: 24px;
+}
+.back {
+width: 100%;
+text-align: center;
+}
+}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>🛒 All Shopping Orders</h1>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr>
+<th>Order ID</th>
+<th>Customer</th>
+<th>Product</th>
+<th>Quantity</th>
+<th>Price</th>
+<th>Order Date</th>
+</tr>
+</thead>
+<tbody>
+<?php
+if ($result->num_rows > 0) {
+while ($row = $result->fetch_assoc()) {
+echo "<tr>";
+echo "<td>" . $row["order_id"] . "</td>";
+echo "<td>" .
+htmlspecialchars($row["customer_name"]) .
+"</td>";
+echo "<td>" .
+htmlspecialchars($row["product_name"]) .
+"</td>";
+echo "<td class='quantity'>" .
+$row["quantity"] .
+"</td>";
+echo "<td class='price'>₹" .
+number_format($row["price"], 2) .
+"</td>";
+echo "<td>" .
+$row["order_date"] .
+"</td>";
+echo "</tr>";
+}
+} else {
+echo "<tr>";
+echo "<td class='empty' colspan='6'>
+No orders found.
+</td>";
+echo "</tr>";
+}
+?>
+</tbody>
+</table>
+</div>
+<a class="back" href="index.html">
+← Back to Order Form
+</a>
+</div>
+</body>
+</html>
+<?php
+$conn->close();
+?>
+Database
+<?php
+$servername = "localhost";
+$username = "root";
+$password = "mysql";
+$dbname = "shopping_db";
+$conn = new mysqli($servername, $username, $password, $dbname);
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+?>
