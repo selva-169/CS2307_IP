@@ -1,0 +1,663 @@
+
+Ex 9:
+Orderform.jsp:
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Place Order</title>
+<style>
+:root {
+--bg-color: #f4f7f6;
+--card-bg: #ffffff;
+--text-main: #2d3748;
+--text-muted: #718096;
+--primary: #2b6cb0;
+--primary-hover: #2c5282;
+--border-color: #e2e8f0;
+--focus-ring: rgba(66, 153, 225, 0.4);
+--error-bg: #fff5f5;
+--error-text: #c53030;
+--error-border: #fed7d7;
+}
+body {
+font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+background-color: var(--bg-color);
+margin: 0;
+padding: 0;
+display: flex;
+justify-content: center;
+align-items: center;
+min-height: 100vh;
+}
+.form-container {
+width: 100%;
+max-width: 420px;
+margin: 20px;
+background: var(--card-bg);
+padding: 35px;
+border-radius: 12px;
+box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+box-sizing: border-box;
+}
+h2 {
+text-align: center;
+color: var(--text-main);
+margin-top: 0;
+margin-bottom: 24px;
+font-size: 24px;
+font-weight: 700;
+letter-spacing: -0.5px;
+}
+.error-message {
+color: var(--error-text);
+background-color: var(--error-bg);
+border: 1px solid var(--error-border);
+padding: 12px;
+border-radius: 6px;
+margin-bottom: 20px;
+font-size: 14px;
+text-align: center;
+}
+.form-group {
+margin-bottom: 18px;
+}
+label {
+display: block;
+margin-bottom: 6px;
+font-weight: 600;
+color: var(--text-main);
+font-size: 14px;
+}
+input[type="text"],
+input[type="number"],
+input[type="date"],
+textarea {
+width: 100%;
+padding: 11px 14px;
+box-sizing: border-box;
+border: 1px solid var(--border-color);
+border-radius: 6px;
+font-size: 15px;
+font-family: inherit;
+background-color: #f8fafc;
+color: var(--text-main);
+transition: all 0.2s ease;
+}
+input[type="text"]::placeholder,
+input[type="number"]::placeholder,
+textarea::placeholder {
+color: var(--text-muted);
+opacity: 0.7;
+}
+input[type="text"]:focus,
+input[type="number"]:focus,
+input[type="date"]:focus,
+textarea:focus {
+outline: none;
+border-color: var(--primary);
+background-color: var(--card-bg);
+box-shadow: 0 0 0 3px var(--focus-ring);
+}
+textarea {
+resize: vertical;
+min-height: 80px;
+}
+input[type="submit"] {
+width: 100%;
+margin-top: 12px;
+padding: 14px;
+background-color: var(--primary);
+color: white;
+border: none;
+border-radius: 6px;
+font-size: 16px;
+font-weight: 600;
+cursor: pointer;
+transition: background-color 0.2s ease;
+}
+input[type="submit"]:hover {
+background-color: var(--primary-hover);
+}
+</style>
+</head>
+<body>
+<div class="form-container">
+<h2>Enter Order Details</h2>
+<% if (request.getAttribute("errorMessage") != null) { %>
+<div class="error-message">
+<%= request.getAttribute("errorMessage") %>
+</div>
+<% } %>
+<form action="AddOrderServlet" method="post">
+<div class="form-group">
+<label for="customerName">Customer Name</label>
+<input type="text" id="customerName" name="customerName" placeholder="e.g. John Doe" required/>
+</div>
+<div class="form-group">
+<label for="productName">Product Name</label>
+<input type="text" id="productName" name="productName" placeholder="e.g. Wireless Mouse" required/>
+</div>
+<div class="form-group">
+<label for="quantity">Quantity</label>
+<input type="number" id="quantity" name="quantity" min="1" placeholder="1" required/>
+</div>
+<div class="form-group">
+<label for="price">Price (per unit)</label>
+<input type="number" id="price" step="0.01" name="price" placeholder="0.00" required/>
+</div>
+<div class="form-group">
+<label for="orderDate">Order Date</label>
+<input type="date" id="orderDate" name="orderDate" required/>
+</div>
+<div class="form-group">
+<label for="address">Delivery Address</label>
+<textarea id="address" name="address" placeholder="Enter complete shipping address..."></textarea>
+</div>
+<input type="submit" value="Place Order"/>
+</form>
+</div>
+</body>
+</html>
+ViewOrders.jsp:
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="java.util.List" %>
+<%@ page import="com.shopping.model.Order" %>
+<%@ page import="com.shopping.dao.OrderDAO" %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Order Details</title>
+<style>
+:root {
+--bg-color: #f8fafc;
+--card-bg: #ffffff;
+--text-main: #1e293b;
+--text-muted: #64748b;
+--primary: #2b6cb0;
+--primary-hover: #2c5282;
+--border-color: #e2e8f0;
+--table-header-bg: #f1f5f9;
+--row-hover: #f8fafc;
+--badge-bg: #e2e8f0;
+--badge-text: #334155;
+}
+body {
+font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+background-color: var(--bg-color);
+margin: 0;
+padding: 40px 20px;
+color: var(--text-main);
+}
+.container {
+max-width: 1100px;
+margin: 0 auto;
+background: var(--card-bg);
+padding: 35px;
+border-radius: 12px;
+box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+}
+.header-wrapper {
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-bottom: 25px;
+flex-wrap: wrap;
+gap: 15px;
+}
+h2 {
+color: var(--text-main);
+margin: 0;
+font-size: 24px;
+font-weight: 700;
+letter-spacing: -0.5px;
+}
+.btn-link {
+display: inline-flex;
+align-items: center;
+padding: 10px 18px;
+background-color: var(--primary);
+color: white;
+text-decoration: none;
+border-radius: 6px;
+font-size: 14px;
+font-weight: 600;
+transition: background-color 0.2s ease, transform 0.1s ease;
+}
+.btn-link:hover {
+background-color: var(--primary-hover);
+}
+.btn-link:active {
+transform: scale(0.98);
+}
+.table-responsive {
+overflow-x: auto;
+border: 1px solid var(--border-color);
+border-radius: 8px;
+box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+}
+table {
+border-collapse: collapse;
+width: 100%;
+font-size: 14px;
+background-color: var(--card-bg);
+}
+th, td {
+padding: 14px 16px;
+text-align: left;
+border-bottom: 1px solid var(--border-color);
+}
+th {
+background-color: var(--table-header-bg);
+color: var(--text-muted);
+font-weight: 600;
+text-transform: uppercase;
+font-size: 12px;
+letter-spacing: 0.5px;
+}
+tr:last-child td {
+border-bottom: none;
+}
+tr:hover td {
+background-color: var(--row-hover);
+}
+.order-id-badge {
+background-color: var(--badge-bg);
+color: var(--badge-text);
+padding: 4px 8px;
+border-radius: 4px;
+font-weight: 600;
+font-family: monospace;
+font-size: 13px;
+}
+.customer-name {
+font-weight: 500;
+color: var(--text-main);
+}
+.product-text {
+color: var(--text-main);
+}
+.qty-text {
+color: var(--text-muted);
+font-weight: 500;
+}
+.price-text {
+font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+font-size: 14px;
+color: var(--text-main);
+}
+.total-text {
+font-weight: 600;
+color: var(--primary);
+}
+.date-text {
+color: var(--text-muted);
+font-size: 13px;
+}
+.address-text {
+color: var(--text-muted);
+max-width: 200px;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+font-size: 13px;
+}
+.address-text:hover {
+white-space: normal;
+word-break: break-word;
+}
+</style>
+</head>
+<body>
+<div class="container">
+<div class="header-wrapper">
+<h2>All Orders</h2>
+<a href="orderForm.jsp" class="btn-link">Place a New Order</a>
+</div>
+<div class="table-responsive">
+<table>
+<thead>
+<tr>
+<th>Order ID</th>
+<th>Customer</th>
+<th>Product</th>
+<th>Qty</th>
+<th>Price</th>
+<th>Total</th>
+<th>Date</th>
+<th>Address</th>
+</tr>
+</thead>
+<tbody>
+<%
+OrderDAO dao = new OrderDAO();
+List<Order> orders = dao.getAllOrders();
+for (Order o : orders) {
+%>
+<tr>
+<td><span class="order-id-badge">#<%= o.getOrderId() %></span></td>
+<td><span class="customer-name"><%= o.getCustomerName() %></span></td>
+<td><span class="product-text"><%= o.getProductName() %></span></td>
+<td><span class="qty-text"><%= o.getQuantity() %></span></td>
+<td class="price-text">$<%= String.format("%.2f", o.getPrice()) %></td>
+<td class="price-text total-text">$<%= String.format("%.2f", o.getTotalAmount()) %></td>
+<td class="date-text"><%= o.getOrderDate() %></td>
+<td><div class="address-text" title="<%= o.getAddress() %>"><%= o.getAddress() %></div></td>
+</tr>
+<%
+}
+%>
+</tbody>
+</table>
+</div>
+</div>
+</body>
+</html>
+Order.java:
+package com.shopping.model;
+import java.math.BigDecimal;
+import java.sql.Date;
+public class Order {
+private int orderId;
+private String customerName;
+private String productName;
+private int quantity;
+private BigDecimal price;
+private BigDecimal totalAmount;
+private Date orderDate;
+private String address;
+/**
+Default constructor required for framework serialization and reflection operations.
+/
+public Order() {
+// Explicitly declared empty body
+}
+/**
+Data creation constructor used to assemble new records before database allocation.
+/
+public Order(String customerName, String productName, int quantity,
+BigDecimal price, BigDecimal totalAmount, Date orderDate, String address) {
+this.customerName = customerName;
+this.productName = productName;
+this.quantity = quantity;
+this.price = price;
+this.totalAmount = totalAmount;
+this.orderDate = orderDate;
+this.address = address;
+}
+/**
+Database mapping constructor used when extracting historical data containing primary keys.
+/
+public Order(int orderId, String customerName, String productName, int quantity,
+BigDecimal price, BigDecimal totalAmount, Date orderDate, String address) {
+this.orderId = orderId;
+this.customerName = customerName;
+this.productName = productName;
+this.quantity = quantity;
+this.price = price;
+this.totalAmount = totalAmount;
+this.orderDate = orderDate;
+this.address = address;
+}
+// ---- Clean Getters and Setters ----
+public int getOrderId() {
+return orderId;
+}
+public void setOrderId(int orderId) {
+this.orderId = orderId;
+}
+public String getCustomerName() {
+return customerName;
+}
+public void setCustomerName(String customerName) {
+this.customerName = customerName;
+}
+public String getProductName() {
+return productName;
+}
+public void setProductName(String productName) {
+this.productName = productName;
+}
+public int getQuantity() {
+return quantity;
+}
+public void setQuantity(int quantity) {
+this.quantity = quantity;
+}
+// Returns a fallback zero value instead of null to prevent application calculation errors
+public BigDecimal getPrice() {
+return price != null ? price : BigDecimal.ZERO;
+}
+public void setPrice(BigDecimal price) {
+this.price = price;
+}
+// Returns a fallback zero value instead of null to prevent application calculation errors
+public BigDecimal getTotalAmount() {
+return totalAmount != null ? totalAmount : BigDecimal.ZERO;
+}
+public void setTotalAmount(BigDecimal totalAmount) {
+this.totalAmount = totalAmount;
+}
+public Date getOrderDate() {
+return orderDate;
+}
+public void setOrderDate(Date orderDate) {
+this.orderDate = orderDate;
+}
+public String getAddress() {
+return address;
+}
+public void setAddress(String address) {
+this.address = address;
+}
+/**
+Overridden diagnostic text mapper to cleanly display configuration parameters within trace logs.
+/
+@Override
+public String toString() {
+return "Order{" +
+"orderId=" + orderId +
+", customerName='" + customerName + ''' +
+", productName='" + productName + ''' +
+", quantity=" + quantity +
+", price=" + price +
+", totalAmount=" + totalAmount +
+", orderDate=" + orderDate +
+", address='" + address + ''' +
+'}';
+}
+}
+DBConnection.java:
+package com.shopping.util;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+/**
+Enterprise utility coordinator handling persistence layer pipeline connection initializations.
+Configured specifically for isolated personal database profiles.
+/
+public class DBConnection {
+private static final Logger LOGGER = Logger.getLogger(DBConnection.class.getName());
+// Consolidated driver connectivity parameters
+private static final String DRIVER_CLASS_NAME = "com.mysql.cj.jdbc.Driver";
+// TARGET CHANGED TO: my_shopping_db to keep your own data separate
+private static final String URL = "jdbc:mysql://localhost:3306/my_shopping_db?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true";
+private static final String USER = "root";
+private static final String PASSWORD = "mysql";
+// Static initialization block handles driver loading automatically on class deployment
+static {
+try {
+Class.forName(DRIVER_CLASS_NAME);
+LOGGER.info("MySQL JDBC Connector Driver successfully loaded into personal runtime context.");
+} catch (ClassNotFoundException e) {
+LOGGER.log(Level.SEVERE, "Critical Infrastructure Alert: MySQL JDBC Driver variant missing from application build dependencies.", e);
+throw new ExceptionInInitializerError("System initialization halted: Missing required Database Connector library. Details: " + e.getMessage());
+}
+}
+/**
+Private constructor prevents explicit class initialization instantiation.
+/
+private DBConnection() {
+throw new UnsupportedOperationException("Utility connection architecture cannot be explicitly instantiated.");
+}
+/**
+Spawns a fresh active database session link directly into the relational management storage server.
+Ensure you leverage a try-with-resources statement on execution block endpoints to prevent socket leak traces.
+
+@return Active database connection link session
+@throws SQLException If database access error occurs or timeout conditions trigger
+/
+public static Connection getConnection() throws SQLException {
+try {
+return DriverManager.getConnection(URL, USER, PASSWORD);
+} catch (SQLException e) {
+LOGGER.log(Level.SEVERE, "Database Connection Pipeline Request Failed. Destination Target: " + URL, e);
+throw e;
+}
+}
+}
+orderDAO.java:
+package com.shopping.dao;
+import com.shopping.model.Order;
+import com.shopping.util.DBConnection;
+import java.sql.;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+public class OrderDAO {
+// Initialize institutional platform logging module
+private static final Logger LOGGER = Logger.getLogger(OrderDAO.class.getName());
+// Consolidated core structural query templates
+private static final String INSERT_ORDER_SQL =
+"INSERT INTO orders (customer_name, product_name, quantity, price, total_amount, order_date, address) VALUES (?, ?, ?, ?, ?, ?, ?)";
+private static final String SELECT_ALL_ORDERS_SQL =
+"SELECT order_id, customer_name, product_name, quantity, price, total_amount, order_date, address FROM orders ORDER BY order_id DESC";
+/**
+Commits a fresh customer order transaction directly to persistent system storage.
+@param order Targeted item details model
+@return true if record successfully written, false otherwise
+/
+public boolean addOrder(Order order) {
+if (order == null) {
+LOGGER.warning("Attempted to insert a null Order object into storage registry.");
+return false;
+}
+try (Connection con = DBConnection.getConnection();
+PreparedStatement ps = con.prepareStatement(INSERT_ORDER_SQL)) {
+ps.setString(1, order.getCustomerName());
+ps.setString(2, order.getProductName());
+ps.setInt(3, order.getQuantity());
+ps.setBigDecimal(4, order.getPrice());
+ps.setBigDecimal(5, order.getTotalAmount());
+ps.setDate(6, order.getOrderDate());
+ps.setString(7, order.getAddress());
+return ps.executeUpdate() > 0;
+} catch (SQLException e) {
+LOGGER.log(Level.SEVERE, "Database connection failure executing order insertion query script.", e);
+return false;
+}
+}
+/**
+Extracts all past order records safely out of relational tables.
+@return Complete historical compilation list
+/
+public List<Order> getAllOrders() {
+List<Order> orderList = new ArrayList<>();
+// Switched to PreparedStatement for uniform driver performance enhancements
+try (Connection con = DBConnection.getConnection();
+PreparedStatement ps = con.prepareStatement(SELECT_ALL_ORDERS_SQL);
+ResultSet rs = ps.executeQuery()) {
+while (rs.next()) {
+Order o = new Order();
+o.setOrderId(rs.getInt("order_id"));
+o.setCustomerName(rs.getString("customer_name"));
+o.setProductName(rs.getString("product_name"));
+o.setQuantity(rs.getInt("quantity"));
+o.setPrice(rs.getBigDecimal("price"));
+o.setTotalAmount(rs.getBigDecimal("total_amount"));
+o.setOrderDate(rs.getDate("order_date"));
+o.setAddress(rs.getString("address"));
+orderList.add(o);
+}
+} catch (SQLException e) {
+LOGGER.log(Level.SEVERE, "Database compilation error compiling complete historical order dataset.", e);
+}
+return orderList;
+}
+}
+addOrderServlet.java:
+package com.shopping.controller;
+import com.shopping.dao.OrderDAO;
+import com.shopping.model.Order;
+import java.io.IOException;
+import java.math.BigDecimal;
+import java.sql.Date;
+import java.util.Objects;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+@WebServlet(name = "AddOrderServlet", urlPatterns = {"/AddOrderServlet"})
+public class AddOrderServlet extends HttpServlet {
+private final OrderDAO orderDAO = new OrderDAO();
+@Override
+protected void doPost(HttpServletRequest request, HttpServletResponse response)
+throws ServletException, IOException {
+try {
+// 1. Extract inputs safely and trim trailing white spaces
+String customerName = Objects.toString(request.getParameter("customerName"), "").trim();
+String productName = Objects.toString(request.getParameter("productName"), "").trim();
+String qtyParam = request.getParameter("quantity");
+String priceParam = request.getParameter("price");
+String dateParam = request.getParameter("orderDate");
+String address = Objects.toString(request.getParameter("address"), "").trim();
+// 2. Validate essential inputs against null or blank values
+if (customerName.isEmpty() || productName.isEmpty() || qtyParam == null || priceParam == null || dateParam == null) {
+handleFailure(request, response, "All fields marked with an asterisk are required.");
+return;
+}
+// 3. Parse data values inside a controlled block to capture formatting issues
+int quantity = Integer.parseInt(qtyParam);
+if (quantity <= 0) {
+handleFailure(request, response, "Quantity must be a positive number greater than zero.");
+return;
+}
+BigDecimal price = new BigDecimal(priceParam);
+if (price.compareTo(BigDecimal.ZERO) < 0) {
+handleFailure(request, response, "Price cannot be a negative value.");
+return;
+}
+// Calculate total financial values safely
+BigDecimal totalAmount = price.multiply(BigDecimal.valueOf(quantity));
+Date orderDate = Date.valueOf(dateParam);
+// 4. Assemble the business entity model object
+Order order = new Order(customerName, productName, quantity, price, totalAmount, orderDate, address);
+// 5. Commit record to database using persistent DAO layer
+boolean isSaved = orderDAO.addOrder(order);
+if (isSaved) {
+response.sendRedirect(request.getContextPath() + "/viewOrders.jsp");
+} else {
+handleFailure(request, response, "Database transaction failed. Please check server logs.");
+}
+} catch (IllegalArgumentException ex) {
+// GlassFish Fix: This catches BOTH NumberFormatException and IllegalArgumentException safely
+handleFailure(request, response, "Invalid numerical data or date structure entered.");
+} catch (Exception ex) {
+// Catch-all block for unhandled infrastructure layer issues
+handleFailure(request, response, "An unexpected application error occurred: " + ex.getMessage());
+}
+}
+private void handleFailure(HttpServletRequest request, HttpServletResponse response, String feedbackMessage)
+throws ServletException, IOException {
+request.setAttribute("errorMessage", feedbackMessage);
+request.getRequestDispatcher("orderForm.jsp").forward(request, response);
+}
+}
